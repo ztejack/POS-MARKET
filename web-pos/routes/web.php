@@ -74,7 +74,7 @@ Route::get('/cetak/transaksi', [TransaksiController::class, 'printpage'])->name(
 // Route::get('/transaksi/cetakdatatransaksi', [TransaksiController::class, 'print.transaksi'])->name('transaksi.print')->middleware('userlevel');
 Route::get('/transaksi/cetakdetailtransaksi/{transaksi}', [TransaksiController::class, 'printpagedetail'])->name('transaksi.detail.print')->middleware('auth');
 Route::post('/printaction', [TransaksiController::class, 'printaction']);
-Route::get('/transaksi/{transaksi}/edit', [TransaksiController::class, 'edit'])->name('transaksi.index')->middleware('kasiradminlevel');
+Route::get('/transaksi/{transaksi}/edit', [TransaksiController::class, 'edit'])->name('transaksi.edit')->middleware('kasiradminlevel');
 Route::delete('/transaksi/{transaksi}/destroy', [TransaksiController::class, 'destroy'])->name('transaksi.destroy')->middleware('kasiradminlevel');
 
 //Satker
@@ -87,7 +87,7 @@ Route::get('/perusahaan/{perusahaan}/detail', [PerusahaanController::class, 'sho
 Route::delete('/perusahaan/{perusahaan}/destroy', [PerusahaanController::class, 'destroy'])->name('perusahaan.destroy')->middleware('userlevel');
 
 // Tagihan
-Route::get('/tagihan', [TagihanController::class, 'index'])->name('perusahaan.detail')->middleware('kasiradminlevel');
+Route::get('/tagihan', [TagihanController::class, 'index'])->name('tagihan.detail')->middleware('kasiradminlevel');
 /*
 php artisan optimize
 php artisan route:cache
