@@ -83,7 +83,7 @@ Partial Class FormLogin
         Me.btn_login.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
         Me.btn_login.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.btn_login.ForeColor = System.Drawing.Color.White
-        Me.btn_login.Location = New System.Drawing.Point(447, 269)
+        Me.btn_login.Location = New System.Drawing.Point(447, 267)
         Me.btn_login.Name = "btn_login"
         Me.btn_login.Size = New System.Drawing.Size(150, 38)
         Me.btn_login.TabIndex = 5

@@ -1,15 +1,31 @@
-﻿Imports Guna.UI2.WinForms
+﻿'Imports System.Security.Policy
+Imports Guna.UI2.WinForms
+Imports System.Text
+Imports Newtonsoft.Json
+Imports System.Net
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+
+
 
 Public Class FormLogin
+    Private dataResults As List(Of DataUsr) = New List(Of DataUsr)
+    'Private Sub btn_login_Click(sender As Object, e As EventArgs) Handles btn_login.Click
+    '    If ValidasiEntry() = True Then
+    '        InEmail.Select()
+    '        Exit Sub
+    '    End If
+
+    '    Call conecDB()      'Open the connection to database
+    '    Call initCMD()      'Initialize the sqlclient command object
+    '    Call CekUser()
+    'End Sub
     Private Sub btn_login_Click(sender As Object, e As EventArgs) Handles btn_login.Click
         If ValidasiEntry() = True Then
             InEmail.Select()
             Exit Sub
         End If
-
-        Call conecDB()      'Open the connection to database
-        Call initCMD()      'Initialize the sqlclient command object
         Call CekUser()
+
     End Sub
 
     Private Sub btn_cancle_Click(sender As Object, e As EventArgs) Handles btn_cancle.Click
@@ -32,66 +48,81 @@ Public Class FormLogin
         End If
     End Function
 
-    Private Sub BtnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_login.Click
-        If ValidasiEntry() = True Then
-            InEmail.Select()
-            Exit Sub
-        End If
+    'Private Sub BtnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_login.Click
+    '    If ValidasiEntry() = True Then
+    '        InEmail.Select()
+    '        Exit Sub
+    '    End If
 
-        Call conecDB()      'Open the connection to database
-        Call initCMD()      'Initialize the sqlclient command object
-        Call CekUser()
-    End Sub
+    '    Call conecDB()      'Open the connection to database
+    '    Call initCMD()      'Initialize the sqlclient command object
+    '    Call CekUser()
+    'End Sub
 
     'Load data user
     Private Sub CekUser()
         Try
-            SQL = "SELECT * FROM users WHERE email ='" & Me.InEmail.Text & "'"
-            '"AND password ='" & getMD5Hash(InPassword.Text) & "'"
+            Dim jsonPost As New JsonPost(URL & "/api/login")
+            Dim dictData As New Dictionary(Of String, Object)
+            dictData.Add("email", InEmail.Text)
+            dictData.Add("password", InPassword.Text)
+            Dim response As String = jsonPost.postData(dictData, "post")
+            'InEmail.Text = response
+            'Try
+            Dim results = JsonConvert.DeserializeObject(response, GetType(DataUsr))
+                'Dim x = JsonConvert.DeserializeObject(Of response)(jsonData)
+                'dataResults = results.datausr.Select(Function(data) New DataUsr With {.email = data.email, .userlevel = data.userlevel, .token = data.token}).ToList
+                dataResults = results.datausr.Select(Function(data) New DataUsr With {.email = data.email, .userlevel = data.userlevel, .token = data.token})
+                'Dim row As DataUsr = New DataUsr With {.email = results.email, .userlevel = results.userlevel, .token = results.token}
+                Email = results.datausr.userlevel
+                InEmail.Text = Email
+                MsgBox(Email, MsgBoxStyle.Exclamation, "Information")
 
-            With comDB
-                .CommandText = SQL
-                .ExecuteNonQuery()
-            End With
-            rdDB = comDB.ExecuteReader
-            rdDB.Read()
-            If InEmail.Text = "" Or InPassword.Text = "" Then
-                MsgBox("Harap Isi Email dan Password anda", MsgBoxStyle.Exclamation, "Information")
+                If InEmail.Text = "" Or InPassword.Text = "" Then
+                    MsgBox("Harap Isi Email dan Password anda", MsgBoxStyle.Exclamation, "Information")
+                ElseIf response = True Then
 
 
-            ElseIf rdDB.HasRows = True Then
-                If rdDB("level_id").ToString = "0" Then
-                    Me.Hide()
-                    MenuUtama.Show()
+                    MsgBox("Email  tidak memiliki akses", MsgBoxStyle.Exclamation, "Information")
 
-                    'FormStatus.Show()
-                    'FormStatus.TXT1.Text = rdDB!name.ToString.Trim
-                    'Dim password = BCrypt.Net.BCrypt.HashPassword("value")
-                    'FormStatus.TXT2.Text = getMD5Hash(InPassword.Text)
-                    'FormStatus.txt_nmbrg.Text = getMD5Hash(InPassword.Text)
-                ElseIf rdDB("level_id").ToString = "1" Then
-                    Me.Hide()
-                    MenuUtama.Show()
+                    'ElseIf rdDB.HasRows = True Then
+                    If rdDB("level_id").ToString = "0" Then
+                        Me.Hide()
+                        MenuUtama.Show()
 
-                    'FormStatus.Show()
-                    'FormStatus.TXT1.Text = rdDB!name.ToString.Trim
-                    'Dim password = BCrypt.Net.BCrypt.HashPassword("value")
-                    'FormStatus.TXT2.Text = getMD5Hash(InPassword.Text)
-                    'FormStatus.txt_nmbrg.Text = getMD5Hash(InPassword.Text)
-                Else
-                    MsgBox("Email '" & InEmail.Text & "' tidak memiliki akses", MsgBoxStyle.Exclamation, "Information")
+                        'FormStatus.Show()
+                        'FormStatus.TXT1.Text = rdDB!name.ToString.Trim
+                        'Dim password = BCrypt.Net.BCrypt.HashPassword("value")
+                        'FormStatus.TXT2.Text = getMD5Hash(InPassword.Text)
+                        'FormStatus.txt_nmbrg.Text = getMD5Hash(InPassword.Text)
+                    ElseIf rdDB("level_id").ToString = "1" Then
+                        Me.Hide()
+                        MenuUtama.Show()
+
+                        'FormStatus.Show()
+                        'FormStatus.TXT1.Text = rdDB!name.ToString.Trim
+                        'Dim password = BCrypt.Net.BCrypt.HashPassword("value")
+                        'FormStatus.TXT2.Text = getMD5Hash(InPassword.Text)
+                        'FormStatus.txt_nmbrg.Text = getMD5Hash(InPassword.Text)
+                    Else
+                        MsgBox("Email '" & InEmail.Text & "' tidak memiliki akses", MsgBoxStyle.Exclamation, "Information")
+                        InEmail.Text = ""
+                        InPassword.Text = ""
+                        InEmail.Select()
+                    End If
+
+                ElseIf response = False Then
+                    MsgBox("Email & password salah", MsgBoxStyle.Exclamation, "Information")
                     InEmail.Text = ""
                     InPassword.Text = ""
-                    InEmail.Select()
+                    'InEmail.Select()
                 End If
+            'rdDB.Close()
+            'Catch ex As Exception
+            '    MessageBox.Show("make sure your database are connected")
+            'End Try
 
-            Else
-                MsgBox("Email '" & InEmail.Text & "' tidak terdaftar", MsgBoxStyle.Exclamation, "Information")
-                InEmail.Text = ""
-                InPassword.Text = ""
-                'InEmail.Select()
-            End If
-            rdDB.Close()
+
         Catch ex As Exception
             MsgBox(ex.ToString)
         End Try
@@ -104,6 +135,14 @@ Public Class FormLogin
     End Sub
 
     Private Sub InEmail_TextChanged(sender As Object, e As EventArgs) Handles InEmail.TextChanged
+
+    End Sub
+
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+
+    End Sub
+
+    Private Sub InPassword_TextChanged(sender As Object, e As EventArgs) Handles InPassword.TextChanged
 
     End Sub
 End Class

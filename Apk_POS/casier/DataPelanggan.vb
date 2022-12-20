@@ -38,8 +38,6 @@ Public Class DataPelanggan
                 If ds.Tables(0).Rows.Count > 0 Then
                     'idpel = rdDB.Item("id")
 
-
-
                     For Each dr As DataRow In ds.Tables(0).Rows
                         idpel = dr.Item("id")
                         namepel = dr.Item("name")

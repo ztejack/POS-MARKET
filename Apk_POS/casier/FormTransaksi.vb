@@ -83,7 +83,6 @@ Public Class FormTransaksi
 
     Private Sub txtbayar_TextChanged(sender As Object, e As EventArgs) Handles txtbayar.TextChanged
         If (cbxmetodebyr.Text = "Tunai") Then
-
             'Dim f As Long
             If txtbayar.Text = "" Or Not IsNumeric(txtbayar.Text) Then
                 Exit Sub
@@ -178,7 +177,6 @@ Public Class FormTransaksi
     Private Sub BtnReset_Click(sender As Object, e As EventArgs) Handles BtnReset.Click
         resetbrg()
     End Sub
-
     Sub delrow()
         If dvgtampil.CurrentRow.Index <> dvgtampil.NewRowIndex Then
             dvgtampil.Rows.RemoveAt(dvgtampil.CurrentRow.Index)
@@ -214,8 +212,6 @@ Public Class FormTransaksi
             MessageBox.Show("Pembayaran Transaksi gagal, belum ada produk yang ditambahkan", "Oops", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             txtkodeB.Focus()
         End If
-
-
     End Sub
 
     Private Sub cbxmetodebyr_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbxmetodebyr.SelectedIndexChanged
@@ -231,7 +227,6 @@ Public Class FormTransaksi
             txtkembalian.Enabled = True
         End If
     End Sub
-
 
     Private Sub txtidpelanggan_TextChanged(sender As Object, e As EventArgs) Handles txtidpelanggan.TextChanged
         If txtidpelanggan.Text IsNot "" Then
@@ -267,7 +262,6 @@ Public Class FormTransaksi
         Else
             txtnamapelanggan.Text = ""
         End If
-
     End Sub
 
     Sub getperusahaan()

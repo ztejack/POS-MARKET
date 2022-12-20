@@ -76,8 +76,7 @@ Partial Class DataPelanggan
         '
         'btn
         '
-        Me.btn.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btn.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btn.BackColor = System.Drawing.SystemColors.HotTrack
         Me.btn.DisabledState.BorderColor = System.Drawing.Color.DarkGray
         Me.btn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
@@ -103,11 +102,6 @@ Partial Class DataPelanggan
         Me.dvgPelanggan.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.dvgPelanggan.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dvgPelanggan.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.dvgPelanggan.BackgroundColor = System.Drawing.Color.White
-        Me.dvgPelanggan.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.dvgPelanggan.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
-        Me.dvgPelanggan.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.Blue
         DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -117,6 +111,7 @@ Partial Class DataPelanggan
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dvgPelanggan.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dvgPelanggan.ColumnHeadersHeight = 21
+        Me.dvgPelanggan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
         Me.dvgPelanggan.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Nama, Me.notel, Me.Email, Me.Perusahaan, Me.Satker})
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
@@ -126,7 +121,6 @@ Partial Class DataPelanggan
         DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
         DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dvgPelanggan.DefaultCellStyle = DataGridViewCellStyle3
-        Me.dvgPelanggan.EnableHeadersVisualStyles = False
         Me.dvgPelanggan.GridColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.dvgPelanggan.Location = New System.Drawing.Point(6, 163)
         Me.dvgPelanggan.Name = "dvgPelanggan"
@@ -140,7 +134,6 @@ Partial Class DataPelanggan
         DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dvgPelanggan.RowHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.dvgPelanggan.RowHeadersVisible = False
-        Me.dvgPelanggan.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dvgPelanggan.Size = New System.Drawing.Size(1287, 470)
         Me.dvgPelanggan.TabIndex = 4
         Me.dvgPelanggan.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
