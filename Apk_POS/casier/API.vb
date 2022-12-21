@@ -4,11 +4,12 @@ Imports System.Text
 Imports Microsoft.VisualBasic
 Imports System.Data
 
+
 Module API
     Public URL As String = "http://127.0.0.1:8000"
     Public Email As String
     Public Password As String
-    Public Token As String
+    Public Token As Long
     Public UserLevel As String
 
     Public Class RootObject
@@ -17,7 +18,15 @@ Module API
     Public Class UserObject
         Public Property datausr() As List(Of DataUsr)
     End Class
+    Public Class Datax
+        Public msg As Boolean
+        Public acces_token As Long
+        Public email As String
+        Public user_level As Integer
+    End Class
+
     Public Class DataUsr
+        Public Property msg() As Boolean
         Public Property email() As Long
         Public Property token() As String
         Public Property userlevel() As String
@@ -72,3 +81,44 @@ Module API
 
     End Class
 End Module
+
+Namespace Global.Utils
+    Namespace Json
+        Public Module modJson
+            ''' <summary>
+            ''' Serializes the specified value to Json
+            ''' </summary>
+            ''' <param name="value">The value to serialize</param> 
+            ''' <param name="settings">The Newtonsoft.Json.JsonSerializerSettings used to serialize the object</param> 
+            ''' <returns>The value serialized to Json</returns>
+            Public Function Serialize(value As Object _
+                                      , Optional settings As Newtonsoft.Json.JsonSerializerSettings = Nothing) As String
+                If settings Is Nothing Then
+                    settings = GetDefaultSettings()
+                End If
+                Return Newtonsoft.Json.JsonConvert.SerializeObject(value, settings)
+            End Function
+
+            ''' <summary>
+            ''' Deserializes the specified value from Json to Object T
+            ''' </summary>
+            ''' <param name="value">The value to deserialize</param> 
+            ''' <param name="settings">The Newtonsoft.Json.JsonSerializerSettings used to deserialize the object</param> 
+            ''' <returns>The value deserialized to Object T</returns>
+            Public Function Deserialize(Of T)(value As String _
+                                              , Optional settings As Newtonsoft.Json.JsonSerializerSettings = Nothing) As T
+                If settings Is Nothing Then
+                    settings = GetDefaultSettings()
+                End If
+                Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of T)(value, settings)
+            End Function
+
+            Private Function GetDefaultSettings() As Newtonsoft.Json.JsonSerializerSettings
+                Static settings As New Newtonsoft.Json.JsonSerializerSettings With {
+                    .Formatting = Newtonsoft.Json.Formatting.Indented
+                }
+                Return settings
+            End Function
+        End Module
+    End Namespace
+End Namespace

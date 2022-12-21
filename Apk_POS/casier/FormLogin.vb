@@ -4,10 +4,11 @@ Imports System.Text
 Imports Newtonsoft.Json
 Imports System.Net
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
-
-
+Imports Newtonsoft.Json.Linq
+Imports System.Security
 
 Public Class FormLogin
+    Dim UserIndex As Integer
     Private dataResults As List(Of DataUsr) = New List(Of DataUsr)
     'Private Sub btn_login_Click(sender As Object, e As EventArgs) Handles btn_login.Click
     '    If ValidasiEntry() = True Then
@@ -67,57 +68,95 @@ Public Class FormLogin
             dictData.Add("email", InEmail.Text)
             dictData.Add("password", InPassword.Text)
             Dim response As String = jsonPost.postData(dictData, "post")
-            'InEmail.Text = response
+            InEmail.Text = response
             'Try
-            Dim results = JsonConvert.DeserializeObject(response, GetType(DataUsr))
-                'Dim x = JsonConvert.DeserializeObject(Of response)(jsonData)
-                'dataResults = results.datausr.Select(Function(data) New DataUsr With {.email = data.email, .userlevel = data.userlevel, .token = data.token}).ToList
-                dataResults = results.datausr.Select(Function(data) New DataUsr With {.email = data.email, .userlevel = data.userlevel, .token = data.token})
-                'Dim row As DataUsr = New DataUsr With {.email = results.email, .userlevel = results.userlevel, .token = results.token}
-                Email = results.datausr.userlevel
-                InEmail.Text = Email
-                MsgBox(Email, MsgBoxStyle.Exclamation, "Information")
+            Dim results As Datax = JsonConvert.DeserializeObject(Of Datax)(response)
+            Email = results.email
+            Token = results.acces_token
+            UserLevel = results.user_level
+            MsgBox(Token, MsgBoxStyle.Exclamation, "Information")
+            Console.WriteLine(Token)
+            '    If results.msg Then
+            '        dataResults.Add(row)
+            '        Dim UserBindingSource As New BindingSource
+            '        UserBindingSource.DataSource = dataResults
+            '    End If
+            '    'Catch
+            'Dim ErrorResult As DataError = JsonConvert.DeserializeObject(response, GetType(DataError))
+            'Dim ErrorData As String
+            'If ErrorResult.email IsNot Nothing Then
+            '    ErrorData += ErrorResult.email(0) & vbCrLf
+            'End If
+            'If ErrorResult.name IsNot Nothing Then
+            '    ErrorData = ErrorResult.name(0) & vbCrLf
+            'End If
+            'If ErrorResult.password IsNot Nothing Then
+            '    ErrorData += ErrorResult.password(0) & vbCrLf
+            'End If
+            'If ErrorResult.password_confirmation IsNot Nothing Then
+            '    ErrorData += ErrorResult.password_confirmation(0) & vbCrLf
+            'End If
+            'MessageBox.Show(ErrorData)
+            'End Try
 
-                If InEmail.Text = "" Or InPassword.Text = "" Then
-                    MsgBox("Harap Isi Email dan Password anda", MsgBoxStyle.Exclamation, "Information")
-                ElseIf response = True Then
 
 
-                    MsgBox("Email  tidak memiliki akses", MsgBoxStyle.Exclamation, "Information")
+            'Dim datax = New List(Of DataUsr)
+            'For I As Integer = 0 To 3
+            '    Dim x As Long = results.datausr.Select(DataUsr.With{})
 
-                    'ElseIf rdDB.HasRows = True Then
-                    If rdDB("level_id").ToString = "0" Then
-                        Me.Hide()
-                        MenuUtama.Show()
+            'Next
+            'Dim xData = JsonConvert.SerializeObject(results.email, Formatting.Indented)
+            'Email = xData
+            'InEmail.Text = Email
+            'MsgBox(Email, MsgBoxStyle.Exclamation, "Information")
+            'If InEmail.Text = "" Or InPassword.Text = "" Then
+            '    MsgBox("Harap Isi Email dan Password anda", MsgBoxStyle.Exclamation, "Information")
+            'ElseIf response = True Then
 
-                        'FormStatus.Show()
-                        'FormStatus.TXT1.Text = rdDB!name.ToString.Trim
-                        'Dim password = BCrypt.Net.BCrypt.HashPassword("value")
-                        'FormStatus.TXT2.Text = getMD5Hash(InPassword.Text)
-                        'FormStatus.txt_nmbrg.Text = getMD5Hash(InPassword.Text)
-                    ElseIf rdDB("level_id").ToString = "1" Then
-                        Me.Hide()
-                        MenuUtama.Show()
 
-                        'FormStatus.Show()
-                        'FormStatus.TXT1.Text = rdDB!name.ToString.Trim
-                        'Dim password = BCrypt.Net.BCrypt.HashPassword("value")
-                        'FormStatus.TXT2.Text = getMD5Hash(InPassword.Text)
-                        'FormStatus.txt_nmbrg.Text = getMD5Hash(InPassword.Text)
-                    Else
-                        MsgBox("Email '" & InEmail.Text & "' tidak memiliki akses", MsgBoxStyle.Exclamation, "Information")
-                        InEmail.Text = ""
-                        InPassword.Text = ""
-                        InEmail.Select()
-                    End If
+            '    MsgBox("Email  tidak memiliki akses", MsgBoxStyle.Exclamation, "Information")
 
-                ElseIf response = False Then
-                    MsgBox("Email & password salah", MsgBoxStyle.Exclamation, "Information")
-                    InEmail.Text = ""
-                    InPassword.Text = ""
-                    'InEmail.Select()
-                End If
-            'rdDB.Close()
+            '    'ElseIf rdDB.HasRows = True Then
+            '    If rdDB("level_id").ToString = "0" Then
+            '        Me.Hide()
+            '        MenuUtama.Show()
+
+            '        'FormStatus.Show()
+            '        'FormStatus.TXT1.Text = rdDB!name.ToString.Trim
+            '        'Dim password = BCrypt.Net.BCrypt.HashPassword("value")
+            '        'FormStatus.TXT2.Text = getMD5Hash(InPassword.Text)
+            '        'FormStatus.txt_nmbrg.Text = getMD5Hash(InPassword.Text)
+            '    ElseIf rdDB("level_id").ToString = "1" Then
+            '        Me.Hide()
+            '        MenuUtama.Show()
+
+            '        'FormStatus.Show()
+            '        'FormStatus.TXT1.Text = rdDB!name.ToString.Trim
+            '        'Dim password = BCrypt.Net.BCrypt.HashPassword("value")
+            '        'FormStatus.TXT2.Text = getMD5Hash(InPassword.Text)
+            '        'FormStatus.txt_nmbrg.Text = getMD5Hash(InPassword.Text)
+            '    Else
+            '        MsgBox("Email '" & InEmail.Text & "' tidak memiliki akses", MsgBoxStyle.Exclamation, "Information")
+            '        InEmail.Text = ""
+            '        InPassword.Text = ""
+            '        InEmail.Select()
+            '    End If
+
+            'ElseIf response = False Then
+            '    MsgBox("Email & password salah", MsgBoxStyle.Exclamation, "Information")
+            '    InEmail.Text = ""
+            '    InPassword.Text = ""
+            '    'InEmail.Select()
+            'End If
+
+            'ElseIf response = False Then
+            'MsgBox("Email & password salah", MsgBoxStyle.Exclamation, "Information")
+            'InEmail.Text = ""
+            'InPassword.Text = ""
+            ''InEmail.Select()
+            'End If
+            ''rdDB.Close()
             'Catch ex As Exception
             '    MessageBox.Show("make sure your database are connected")
             'End Try
@@ -127,7 +166,6 @@ Public Class FormLogin
             MsgBox(ex.ToString)
         End Try
     End Sub
-
     Private Sub LoadData(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles InPassword.KeyDown
         If e.KeyCode = Keys.Enter Then
             ProcessTabKey(True) 'Move to next text box
