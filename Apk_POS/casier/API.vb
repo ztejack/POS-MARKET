@@ -12,25 +12,39 @@ Module API
     Public Token As Long
     Public UserLevel As String
 
+    'BARANG OBJECT
     Public Class RootObject
         Public Property databarang() As List(Of DataBrg)
     End Class
+
+    'USERS OBJECT
     Public Class UserObject
         Public Property datausr() As List(Of DataUsr)
     End Class
-    Public Class Datax
+    Public Class DataUsr
         Public msg As Boolean
         Public acces_token As Long
         Public email As String
         Public user_level As Integer
     End Class
-
-    Public Class DataUsr
-        Public Property msg() As Boolean
-        Public Property email() As Long
-        Public Property token() As String
-        Public Property userlevel() As String
+    Public Class DataUsrErr
+        Public status As Boolean
+        Public msg As String
     End Class
+    'Public Class DataUsr
+    '    Public Property status() As Boolean
+    '    Public Property email() As Long
+    '    Public Property token() As String
+    '    Public Property userlevel() As String
+    'End Class
+    Public Class UserError
+        Public Property msg() As List(Of String)
+        Public Property acces_token() As List(Of String)
+        Public Property email() As List(Of String)
+        Public Property name() As List(Of String)
+        Public Property user_level As List(Of String)
+    End Class
+
     Public Class JsonPost
 
         Private urlToPost As String = ""
@@ -68,6 +82,7 @@ Module API
 
             Try
                 webClient.Headers("content-type") = "application/json"
+                webClient.Headers("Authorization") = "Bearer {'" & Token & "'}"
                 resByte = webClient.DownloadData(Me.urlToPost)
                 resString = Encoding.Default.GetString(resByte)
 

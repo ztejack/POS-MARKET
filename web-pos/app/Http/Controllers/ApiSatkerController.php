@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Satker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
-class ApiUsersController extends Controller
+class ApiProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,8 +16,10 @@ class ApiUsersController extends Controller
      */
     public function index()
     {
-        return response()->json(User::orderBy(request('column') ? request('column') : 'updated_at', request('direction') ? request('direction') : 'desc')->paginate());
+        return response()->json(Satker::orderBy(request('column') ? request('column') : 'updated_at', request('direction') ? request('direction') : 'desc')->paginate());
+
     }
+
 
     /**
      * Store a newly created resource in storage.

@@ -88,6 +88,7 @@ Route::delete('/perusahaan/{perusahaan}/destroy', [PerusahaanController::class, 
 
 // Tagihan
 Route::get('/tagihan', [TagihanController::class, 'index'])->name('tagihan.detail')->middleware('kasiradminlevel');
+
 /*
 php artisan optimize
 php artisan route:cache

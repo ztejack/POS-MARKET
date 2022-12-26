@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormLogin
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class FormLogin
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.Guna2AnimateWindow1 = New Guna.UI2.WinForms.Guna2AnimateWindow(Me.components)
@@ -32,10 +32,6 @@ Partial Class FormLogin
         Me.Guna2ColorTransition1 = New Guna.UI2.WinForms.Guna2ColorTransition(Me.components)
         Me.btn_cancle = New Guna.UI2.WinForms.Guna2Button()
         Me.InEmail = New Guna.UI2.WinForms.Guna2TextBox()
-        Me.DataSet1 = New System.Data.DataSet()
-        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        CType(Me.DataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LUsername
@@ -143,10 +139,6 @@ Partial Class FormLogin
         Me.InEmail.Size = New System.Drawing.Size(570, 36)
         Me.InEmail.TabIndex = 9
         '
-        'DataSet1
-        '
-        Me.DataSet1.DataSetName = "NewDataSet"
-        '
         'FormLogin
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -170,8 +162,6 @@ Partial Class FormLogin
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Form Login"
         Me.TopMost = True
-        CType(Me.DataSet1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -185,6 +175,4 @@ Partial Class FormLogin
     Friend WithEvents Guna2ColorTransition1 As Guna.UI2.WinForms.Guna2ColorTransition
     Friend WithEvents btn_cancle As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents InEmail As Guna.UI2.WinForms.Guna2TextBox
-    Friend WithEvents DataSet1 As DataSet
-    Friend WithEvents BindingSource1 As BindingSource
 End Class

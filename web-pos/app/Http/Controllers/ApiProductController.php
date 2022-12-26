@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ProductResource;
 use App\Models\Produk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -16,14 +17,9 @@ class ApiProductController extends Controller
      */
     public function index()
     {
-        if($request->header('token')){
-                $user = User::where('remember_token', $request->header('token'))->firstOrFail();
-                $token = $request->header('token');
-                if ($user['remember_token']===$token) {
-                        // return User::where('token', $token)->first();
-                return response()->json(Produk::orderBy(request('column') ? request('column') : 'updated_at', request('direction') ? request('direction') : 'desc')->paginate());
-            }
-        }
+        // return response()->json(Produk::orderBy(request('column') ? request('column') : 'updated_at', request('direction') ? request('direction') : 'desc')->paginate());
+        return ProductResource::collection(Produk::all());
+
     }
 
 
@@ -62,12 +58,22 @@ class ApiProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Produk  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
-        //
+        // $produks = Produk::all();
+        // $fields = ['id', 'name'];
+        // foreach($fields as $field){
+        //     if(!empty($request->$field)){
+        //         $query->where(Produk::, '=', $request->$field);
+        //     }
+        // }
+        $produk = Produk::find($id);
+        // return new ProductResource($product);
+
+        return $produk;
     }
 
     // /**

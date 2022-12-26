@@ -42,8 +42,9 @@ class ApiAuthController extends Controller
     {
         if (! Auth::attempt($request->only('email', 'password'))) {
             return response()->json([
-                'message' => 'Unauthorized'
-            ], 401);
+                'status' => FALSE,
+                'msg' => 'Email password salah'
+            ]);
         }
 
         $user = User::where('email', $request->email)->firstOrFail();
@@ -53,7 +54,7 @@ class ApiAuthController extends Controller
         $token = $user['remember_token'];
 
         return response()->json([
-            'msg' => TRUE,
+            'statu' => TRUE,
             'access_token' => $token,
             'email' => $user['email'],
             'level_id' => $user['level_id']

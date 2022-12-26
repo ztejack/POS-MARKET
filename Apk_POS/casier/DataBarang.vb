@@ -15,61 +15,28 @@ Public Class DataBarang
     'Dim UserId As String = ""
 
     Private dataResults As List(Of DataBrg) = New List(Of DataBrg)
-    'Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-    '    Dim jsonPost As New JsonPost(URL & "/api/users/" & UserId)
-    '    Dim dictData As New Dictionary(Of String, Object)
-    '    dictData.Add("name", TextBox1.Text)
-    '    dictData.Add("email", TextBox2.Text)
-    '    dictData.Add("password", TextBox3.Text)
-    '    dictData.Add("password_confirmation", TextBox4.Text)
-    '    Dim response As String = jsonPost.postData(dictData, "put")
-    '    Label1.Text = response
-    '    Try
-    '        Dim results As Data = JsonConvert.DeserializeObject(response, GetType(Data))
-    '        Dim row As Data = New Data With {.id = results.id, .name = results.name, .email = results.email, .created_at = results.created_at, .updated_at = results.updated_at}
-    '        If results.id Then
-    '            Dim dataCell As Data = dataResults.ElementAt(UserIndex)
-    '            dataCell.name = results.name
-    '            dataCell.email = results.email
-    '            dataCell.created_at = results.created_at
-    '            dataCell.updated_at = results.updated_at
 
-    '            Dim UserBindingSource As New BindingSource
-    '            UserBindingSource.DataSource = dataResults
-    '            Guna2DataGridView1.DataSource = UserBindingSource
-    '        End If
-    '    Catch ex As Exception
-
-    '    End Try
     'End Sub
 
-    'Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-    '    Dim jsonPost As New JsonPost(URL & "/api/users/" & UserId)
-    '    Dim dictData As New Dictionary(Of String, Object)
-    '    Dim response As String = jsonPost.postData(dictData, "delete")
-    '    Try
-    '        If True Then
-    '            dataResults.RemoveAt(UserIndex)
-    '            Dim UserBindingSource As New BindingSource
-    '            UserBindingSource.DataSource = dataResults
-    '            DataGridView1.DataSource = UserBindingSource
-    '        End If
-    '    Catch ex As Exception
-    '        MessageBox.Show(ex.Message)
-    '    End Try
-    'End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim jsonpost As New JsonPost(URL & "/api/product")
+        TextBox1.Text = API.Email
+        TextBox2.Text = API.Token
+
+        Dim jsonpost As New JsonPost(URL & "/api/v1/product")
         Dim response As String = jsonpost.getData()
         Try
             Dim results As RootObject = JsonConvert.DeserializeObject(response, GetType(RootObject))
 
             dataResults = results.databarang.Select(Function(data) New DataBrg With {.kodePrd = data.kodePrd, .namaPrd = data.namaPrd, .stok = data.stok, .satuan = data.satuan, .price = data.price, .modalprice = data.modalprice, .oldprice = data.oldprice, .updated_at = data.updated_at}).ToList
-            Guna2DataGridView1.DataSource = dataResults
+            dvgBarang.DataSource = dataResults
         Catch ex As Exception
             MessageBox.Show("make sure your database are connected")
         End Try
+
+    End Sub
+
+    Private Sub Guna2DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
 
     End Sub
 
@@ -135,6 +102,26 @@ Public Class DataBarang
     'Private Sub Guna2DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles Guna2DataGridView1.CellContentClick
 
     'End Sub
+
+    Private Sub TXT1_Click(sender As Object, e As EventArgs) Handles TXT1.Click
+
+    End Sub
+
+    Private Sub btn_Click(sender As Object, e As EventArgs) Handles btn.Click
+
+    End Sub
+
+    Private Sub dvgPelanggan_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dvgBarang.CellContentClick
+
+    End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+
+    End Sub
+
+    Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs) Handles TextBox2.TextChanged
+
+    End Sub
 End Class
 Public Class DataBrg
     Public Property kodePrd() As Long
@@ -146,9 +133,4 @@ Public Class DataBrg
     Public Property oldprice() As String
     Public Property updated_at() As Date
 End Class
-Public Class DataError
-    Public Property email() As List(Of String)
-    Public Property name() As List(Of String)
-    Public Property password As List(Of String)
-    Public Property password_confirmation As List(Of String)
-End Class
+
