@@ -3,8 +3,6 @@ Imports System.Net
 Imports System.Text
 Imports Microsoft.VisualBasic
 Imports System.Data
-
-
 Module API
     Public URL As String = "http://127.0.0.1:8000"
     Public Email As String
@@ -12,10 +10,10 @@ Module API
     Public Token As String
     Public UserLevel As String
 
-    'BARANG OBJECT
-    Public Class RootObject
-        Public Property databarang() As List(Of DataBrg)
-    End Class
+    ''BARANG OBJECT
+    'Public Class RootObject
+    '    Public Property data() As List(Of DataBrg)
+    'End Class
 
     'USERS OBJECT
     Public Class UserObject

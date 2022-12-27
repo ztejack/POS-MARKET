@@ -28,10 +28,6 @@ Partial Class DataBarang
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.dvgBarang = New Guna.UI2.WinForms.Guna2DataGridView()
-        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Nama = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.notel = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Email = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TXT1 = New System.Windows.Forms.Label()
         Me.btn = New Guna.UI2.WinForms.Guna2Button()
         Me.txtkode = New Guna.UI2.WinForms.Guna2TextBox()
@@ -57,6 +53,8 @@ Partial Class DataBarang
         '
         'dvgBarang
         '
+        Me.dvgBarang.AllowUserToAddRows = False
+        Me.dvgBarang.AllowUserToDeleteRows = False
         Me.dvgBarang.AllowUserToResizeRows = False
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -77,7 +75,6 @@ Partial Class DataBarang
         Me.dvgBarang.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dvgBarang.ColumnHeadersHeight = 21
         Me.dvgBarang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
-        Me.dvgBarang.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Nama, Me.notel, Me.Email})
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -89,6 +86,7 @@ Partial Class DataBarang
         Me.dvgBarang.GridColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.dvgBarang.Location = New System.Drawing.Point(6, 163)
         Me.dvgBarang.Name = "dvgBarang"
+        Me.dvgBarang.ReadOnly = True
         Me.dvgBarang.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
@@ -114,7 +112,7 @@ Partial Class DataBarang
         Me.dvgBarang.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White
         Me.dvgBarang.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
         Me.dvgBarang.ThemeStyle.HeaderStyle.Height = 21
-        Me.dvgBarang.ThemeStyle.ReadOnly = False
+        Me.dvgBarang.ThemeStyle.ReadOnly = True
         Me.dvgBarang.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White
         Me.dvgBarang.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
         Me.dvgBarang.ThemeStyle.RowsStyle.Font = New System.Drawing.Font("Segoe UI", 10.5!)
@@ -122,26 +120,6 @@ Partial Class DataBarang
         Me.dvgBarang.ThemeStyle.RowsStyle.Height = 22
         Me.dvgBarang.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.dvgBarang.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        '
-        'ID
-        '
-        Me.ID.HeaderText = "Kode Barang"
-        Me.ID.Name = "ID"
-        '
-        'Nama
-        '
-        Me.Nama.HeaderText = "Nama Barang"
-        Me.Nama.Name = "Nama"
-        '
-        'notel
-        '
-        Me.notel.HeaderText = "Stok"
-        Me.notel.Name = "notel"
-        '
-        'Email
-        '
-        Me.Email.HeaderText = "Harga"
-        Me.Email.Name = "Email"
         '
         'TXT1
         '
@@ -218,8 +196,4 @@ Partial Class DataBarang
     Friend WithEvents TXT1 As System.Windows.Forms.Label
     Friend WithEvents btn As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents txtkode As Guna.UI2.WinForms.Guna2TextBox
-    Friend WithEvents ID As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Nama As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents notel As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Email As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

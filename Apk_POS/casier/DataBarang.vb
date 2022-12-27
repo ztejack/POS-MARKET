@@ -9,39 +9,72 @@ Imports System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel
 Imports Google.Protobuf.Reflection.FieldDescriptorProto.Types
 
 Public Class DataBarang
-    'Dim UserIndex As Integer
-    'Dim UserName As String = ""
-    'Dim UserEmail As String = ""
-    'Dim UserId As String = ""
-
-    Private dataResults As List(Of DataBrg) = New List(Of DataBrg)
+    'Private dataResults As List(Of DataBrg) = New List(Of DataBrg)
 
     'End Sub
 
 
+    'Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    '    Dim jsonpost As New JsonPost(URL & "/api/v1/product")
+    '    Dim response As String = jsonpost.getData()
+    '    'Try
+    '    Dim results As RootObject = JsonConvert.DeserializeObject(response, GetType(RootObject))
+
+    '    dataResults = results.databarang.Select(Function(data) New DataBrg With {.id = data.id}).ToList
+    '    '                                        .id = data.id,
+    '    '                                        .kodePrd = data.kodePrd,
+    '    '                                        .namaPrd = data.namaPrd,
+    '    '                                        .stok = data.stok,
+    '    '                                        .satuan = data.satuan,
+    '    '                                        .price = data.price,
+    '    '                                        .modalprice = data.modalprice,
+    '    '                                        .oldprice = data.oldprice,
+    '    '                                        .updated_at = data.updated_at,
+    '    '                                        .created_at = data.created_at}).ToList
+    '    'Catch ex As Exception
+    '    '    MessageBox.Show("make sure your database are connected")
+    '    'End Try
+
+    'End Sub
+    Public Class DataBrg
+        Public Property ID() As Integer
+        Public Property Kode_Barang() As Long
+        Public Property Nama_Barang() As String
+        Public Property Stok() As String
+        Public Property Satuan() As String
+        Public Property Harga() As String
+        Public Property Harga_Modal() As String
+        Public Property Harga_Lama() As String
+        'Public Property updated_at() As Date
+        'Public Property created_at() As Date
+    End Class
+
+    Public Class RootObject
+        Public Property data() As List(Of DataBrg)
+    End Class
+    Private dataResults As List(Of DataBrg) = New List(Of DataBrg)
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim jsonPost As New JsonPost(URL & "/api/v1/product")
+        Dim response As String = jsonPost.getData()
+        Try
+            Dim results As RootObject = JsonConvert.DeserializeObject(response, GetType(RootObject))
 
-        Dim jsonpost As New JsonPost(URL & "/api/v1/product")
-        Dim response As String = jsonpost.getData()
-        'Try
-        Dim results As RootObject = JsonConvert.DeserializeObject(response, GetType(RootObject))
-
-        dataResults = results.databarang.Select(Function(data) New DataBrg With {.id = data.id}).ToList
-        '.id = data.id,
-        '                                        .kodePrd = data.kodePrd,
-        '                                        .namaPrd = data.namaPrd,
-        '                                        .stok = data.stok,
-        '                                        .satuan = data.satuan,
-        '                                        .price = data.price,
-        '                                        .modalprice = data.modalprice,
-        '                                        .oldprice = data.oldprice,
-        '                                        .updated_at = data.updated_at,
-        '                                        .created_at = data.created_at}).ToList
-        'Catch ex As Exception
-        '    MessageBox.Show("make sure your database are connected")
-        'End Try
-
+            dataResults = results.data.Select(Function(data) New DataBrg With {.ID = data.ID, .Kode_Barang = data.Kode_Barang,
+                                                .Nama_Barang = data.Nama_Barang,
+                                                    .Stok = data.Stok,
+                                                    .Satuan = data.Satuan,
+                                                    .Harga = data.Harga,
+                                                    .Harga_Modal = data.Harga_Modal,
+                                                    .Harga_Lama = data.Harga_Lama}).ToList
+            dvgBarang.DataSource = dataResults
+        Catch ex As Exception
+            MessageBox.Show("make sure your database are connected")
+        End Try
     End Sub
+
+
 
     Private Sub Guna2DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
 
@@ -122,20 +155,23 @@ Public Class DataBarang
 
     End Sub
 
-End Class
-Public Class DataBrg
+    Private Sub Guna2DataGridView1_CellContentClick_1(sender As Object, e As DataGridViewCellEventArgs)
 
-    Public Property id() As Integer
-    Public Property kodePrd() As Long
-    Public Property namaPrd() As String
-    Public Property stok() As String
-    Public Property satuan() As String
-    Public Property price() As String
-    Public Property modalprice() As String
-    Public Property oldprice() As String
-    Public Property updated_at() As Date
-    Public Property created_at() As Date
+    End Sub
 End Class
+'Public Class DataBrg
+
+'    Public Property id() As Integer
+'    Public Property kodePrd() As Long
+'    Public Property namaPrd() As String
+'    Public Property stok() As String
+'    Public Property satuan() As String
+'    Public Property price() As String
+'    Public Property modalprice() As String
+'    Public Property oldprice() As String
+'    Public Property updated_at() As Date
+'    Public Property created_at() As Date
+'End Class
 'Public Class Data
 '    Public Property id() As Long
 '    Public Property name() As String
