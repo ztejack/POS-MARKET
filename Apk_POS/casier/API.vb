@@ -9,7 +9,7 @@ Module API
     Public URL As String = "http://127.0.0.1:8000"
     Public Email As String
     Public Password As String
-    Public Token As Long
+    Public Token As String
     Public UserLevel As String
 
     'BARANG OBJECT
@@ -23,7 +23,7 @@ Module API
     End Class
     Public Class DataUsr
         Public msg As Boolean
-        Public acces_token As Long
+        Public access_token As String
         Public email As String
         Public user_level As Integer
     End Class
@@ -39,7 +39,7 @@ Module API
     'End Class
     Public Class UserError
         Public Property msg() As List(Of String)
-        Public Property acces_token() As List(Of String)
+        Public Property access_token() As List(Of String)
         Public Property email() As List(Of String)
         Public Property name() As List(Of String)
         Public Property user_level As List(Of String)
@@ -82,7 +82,8 @@ Module API
 
             Try
                 webClient.Headers("content-type") = "application/json"
-                webClient.Headers("Authorization") = "Bearer {'" & Token & "'}"
+                'webClient.Headers("Authorization") = "Bearer {'" & Token & "'}"
+                webClient.Headers.Add("Authorization", "Bearer " & Token)
                 resByte = webClient.DownloadData(Me.urlToPost)
                 resString = Encoding.Default.GetString(resByte)
 

@@ -18,7 +18,8 @@ class ApiProductController extends Controller
     public function index()
     {
         // return response()->json(Produk::orderBy(request('column') ? request('column') : 'updated_at', request('direction') ? request('direction') : 'desc')->paginate());
-        return ProductResource::collection(Produk::all());
+        // return ProductResource::collection(Produk::all());
+        return response()->json(Produk::orderBy(request('column') ? request('column') : 'updated_at', request('direction') ? request('direction') : 'desc')->paginate());
 
     }
 

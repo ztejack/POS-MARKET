@@ -17,7 +17,6 @@ Public Class FormLogin
             Exit Sub
         End If
         Call CekUser()
-
     End Sub
 
     Private Sub btn_cancle_Click(sender As Object, e As EventArgs) Handles btn_cancle.Click
@@ -46,13 +45,13 @@ Public Class FormLogin
             dictData.Add("email", InEmail.Text)
             dictData.Add("password", InPassword.Text)
             Dim response As String = jsonPost.postData(dictData, "post")
+            Console.WriteLine(response)
 
             Try
                 Dim results As DataUsr = JsonConvert.DeserializeObject(Of DataUsr)(response)
                 Email = results.email
-                Token = results.acces_token
+                Token = results.access_token
                 UserLevel = results.user_level
-                'MsgBox(Email, MsgBoxStyle.Exclamation, "Information")
 
                 If UserLevel = 0 Then
                     Me.Hide()

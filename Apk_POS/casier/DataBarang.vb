@@ -20,19 +20,26 @@ Public Class DataBarang
 
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        TextBox1.Text = API.Email
-        TextBox2.Text = API.Token
 
         Dim jsonpost As New JsonPost(URL & "/api/v1/product")
         Dim response As String = jsonpost.getData()
-        Try
-            Dim results As RootObject = JsonConvert.DeserializeObject(response, GetType(RootObject))
+        'Try
+        Dim results As RootObject = JsonConvert.DeserializeObject(response, GetType(RootObject))
 
-            dataResults = results.databarang.Select(Function(data) New DataBrg With {.kodePrd = data.kodePrd, .namaPrd = data.namaPrd, .stok = data.stok, .satuan = data.satuan, .price = data.price, .modalprice = data.modalprice, .oldprice = data.oldprice, .updated_at = data.updated_at}).ToList
-            dvgBarang.DataSource = dataResults
-        Catch ex As Exception
-            MessageBox.Show("make sure your database are connected")
-        End Try
+        dataResults = results.databarang.Select(Function(data) New DataBrg With {.id = data.id}).ToList
+        '.id = data.id,
+        '                                        .kodePrd = data.kodePrd,
+        '                                        .namaPrd = data.namaPrd,
+        '                                        .stok = data.stok,
+        '                                        .satuan = data.satuan,
+        '                                        .price = data.price,
+        '                                        .modalprice = data.modalprice,
+        '                                        .oldprice = data.oldprice,
+        '                                        .updated_at = data.updated_at,
+        '                                        .created_at = data.created_at}).ToList
+        'Catch ex As Exception
+        '    MessageBox.Show("make sure your database are connected")
+        'End Try
 
     End Sub
 
@@ -115,15 +122,10 @@ Public Class DataBarang
 
     End Sub
 
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
-
-    End Sub
-
-    Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs) Handles TextBox2.TextChanged
-
-    End Sub
 End Class
 Public Class DataBrg
+
+    Public Property id() As Integer
     Public Property kodePrd() As Long
     Public Property namaPrd() As String
     Public Property stok() As String
@@ -132,5 +134,14 @@ Public Class DataBrg
     Public Property modalprice() As String
     Public Property oldprice() As String
     Public Property updated_at() As Date
+    Public Property created_at() As Date
 End Class
+'Public Class Data
+'    Public Property id() As Long
+'    Public Property name() As String
+'    Public Property email() As String
+'    Public Property email_verified_at() As String
+'    Public Property created_at() As Date
+'    Public Property updated_at() As Date
+'End Class
 
