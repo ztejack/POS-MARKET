@@ -44,7 +44,7 @@ Public Class FormLogin
             Dim dictData As New Dictionary(Of String, Object)
             dictData.Add("email", InEmail.Text)
             dictData.Add("password", InPassword.Text)
-            Dim response As String = jsonPost.postData(dictData, "post")
+            Dim response As String = jsonPost.postDataLogin(dictData, "post")
             Console.WriteLine(response)
 
             Try

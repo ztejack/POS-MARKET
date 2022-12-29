@@ -62,7 +62,7 @@ class ApiProductController extends Controller
      * @param  \App\Models\Produk  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Produk $produk)
     {
         // $produks = Produk::all();
         // $fields = ['id', 'name'];
@@ -71,10 +71,27 @@ class ApiProductController extends Controller
         //         $query->where(Produk::, '=', $request->$field);
         //     }
         // }
-        $produk = Produk::find($id);
+        $produks = ProductResource::collection(Produk::findOrFail($produk));
         // return new ProductResource($product);
 
-        return $produk;
+        return $produks;
+    }
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Produk  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request){
+        // $produks = ProductResource::collection(Produk::all());
+        $produk = Produk::where('kodePrd','LIKE','%'.$request->kode."%")->get();
+
+        // return $request;
+        // return Produk::all();
+
+        return ProductResource::collection($produk);
+
+
     }
 
     // /**

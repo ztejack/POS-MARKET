@@ -44,10 +44,6 @@ Public Class DataBarang
         Public Property Stok() As String
         Public Property Satuan() As String
         Public Property Harga() As String
-        Public Property Harga_Modal() As String
-        Public Property Harga_Lama() As String
-        'Public Property updated_at() As Date
-        'Public Property created_at() As Date
     End Class
 
     Public Class RootObject
@@ -65,9 +61,7 @@ Public Class DataBarang
                                                 .Nama_Barang = data.Nama_Barang,
                                                     .Stok = data.Stok,
                                                     .Satuan = data.Satuan,
-                                                    .Harga = data.Harga,
-                                                    .Harga_Modal = data.Harga_Modal,
-                                                    .Harga_Lama = data.Harga_Lama}).ToList
+                                                    .Harga = data.Harga}).ToList
             dvgBarang.DataSource = dataResults
         Catch ex As Exception
             MessageBox.Show("make sure your database are connected")
@@ -148,7 +142,24 @@ Public Class DataBarang
     End Sub
 
     Private Sub btn_Click(sender As Object, e As EventArgs) Handles btn.Click
+        'Dim jsonPost As New JsonPost(URL & "/api/v1/product/search?kode=" & txtkode.Text)
+        Dim jsonPost As New JsonPost(URL & "/api/v1/product/search")
+        Dim dictData As New Dictionary(Of String, Object)
+        dictData.Add("kode", txtkode.Text)
+        Dim response As String = jsonPost.postData(dictData, "post")
+        Console.WriteLine(response)
+        Try
+            Dim results As RootObject = JsonConvert.DeserializeObject(response, GetType(RootObject))
 
+            dataResults = results.data.Select(Function(data) New DataBrg With {.ID = data.ID, .Kode_Barang = data.Kode_Barang,
+                                                .Nama_Barang = data.Nama_Barang,
+                                                    .Stok = data.Stok,
+                                                    .Satuan = data.Satuan,
+                                                    .Harga = data.Harga}).ToList
+            dvgBarang.DataSource = dataResults
+        Catch ex As Exception
+            MessageBox.Show("make sure your database are connected")
+        End Try
     End Sub
 
     Private Sub dvgPelanggan_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dvgBarang.CellContentClick
@@ -156,6 +167,10 @@ Public Class DataBarang
     End Sub
 
     Private Sub Guna2DataGridView1_CellContentClick_1(sender As Object, e As DataGridViewCellEventArgs)
+
+    End Sub
+
+    Private Sub txtkode_TextChanged(sender As Object, e As EventArgs) Handles txtkode.TextChanged
 
     End Sub
 End Class

@@ -76,7 +76,6 @@ Partial Class DataPelanggan
         '
         'btn
         '
-        Me.btn.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btn.BackColor = System.Drawing.SystemColors.HotTrack
         Me.btn.DisabledState.BorderColor = System.Drawing.Color.DarkGray
         Me.btn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray

@@ -31,7 +31,8 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     //     return $request->user();
     // });
     Route::get('product', [ApiProductController::class, 'index'])->name('products.index');
-    Route::get('product/{product}', [ApiProductController::class, 'show'])->name('products.show');
+    Route::post('product/search', [ApiProductController::class, 'search'])->name('products.search');
+
     // Route::post('product', [ApiProductController::class, 'store'])->name('products.store');
     // Route::put('product/{product}', [ApiProductController::class, 'update'])->name('products.update');
     // Route::delete('product/{product}', [ApiProductController::class, 'destroy'])->name('products.destroy');
@@ -42,5 +43,6 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
 
     ]);
 });
+
 
 

@@ -50,6 +50,27 @@ Module API
         Public Sub New(ByVal urlToPost As String)
             Me.urlToPost = urlToPost
         End Sub
+        Public Function postDataLogin(ByVal dictData As Dictionary(Of String, Object), ByVal actionData As String) As String
+            Dim webClient As New WebClient()
+            Dim resByte As Byte()
+            Dim reqByte As Byte()
+            Dim resString As String
+            Dim reqString() As Byte
+
+            Try
+                webClient.Headers("content-type") = "application/json"
+                reqString = Encoding.Default.GetBytes(JsonConvert.SerializeObject(dictData, Formatting.Indented))
+                resByte = webClient.UploadData(Me.urlToPost, actionData, reqString)
+
+                resString = Encoding.Default.GetString(resByte)
+
+                webClient.Dispose()
+                Return resString
+            Catch ex As Exception
+                Console.WriteLine(ex.Message)
+            End Try
+            Return False
+        End Function
         Public Function postData(ByVal dictData As Dictionary(Of String, Object), ByVal actionData As String) As String
             Dim webClient As New WebClient()
             Dim resByte As Byte()
@@ -59,6 +80,7 @@ Module API
 
             Try
                 webClient.Headers("content-type") = "application/json"
+                webClient.Headers.Add("Authorization", "Bearer " & Token)
                 reqString = Encoding.Default.GetBytes(JsonConvert.SerializeObject(dictData, Formatting.Indented))
                 resByte = webClient.UploadData(Me.urlToPost, actionData, reqString)
 
