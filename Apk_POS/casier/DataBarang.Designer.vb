@@ -29,8 +29,11 @@ Partial Class DataBarang
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.dvgBarang = New Guna.UI2.WinForms.Guna2DataGridView()
         Me.TXT1 = New System.Windows.Forms.Label()
-        Me.btn = New Guna.UI2.WinForms.Guna2Button()
+        Me.btnCari = New Guna.UI2.WinForms.Guna2Button()
         Me.txtkode = New Guna.UI2.WinForms.Guna2TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtnama = New Guna.UI2.WinForms.Guna2TextBox()
+        Me.btnRefres = New Guna.UI2.WinForms.Guna2Button()
         Me.GroupBox1.SuspendLayout()
         CType(Me.dvgBarang, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -40,9 +43,12 @@ Partial Class DataBarang
         Me.GroupBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox1.Controls.Add(Me.btnRefres)
+        Me.GroupBox1.Controls.Add(Me.Label1)
+        Me.GroupBox1.Controls.Add(Me.txtnama)
         Me.GroupBox1.Controls.Add(Me.dvgBarang)
         Me.GroupBox1.Controls.Add(Me.TXT1)
-        Me.GroupBox1.Controls.Add(Me.btn)
+        Me.GroupBox1.Controls.Add(Me.btnCari)
         Me.GroupBox1.Controls.Add(Me.txtkode)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
@@ -132,21 +138,21 @@ Partial Class DataBarang
         Me.TXT1.TabIndex = 0
         Me.TXT1.Text = "Kode Barang"
         '
-        'btn
+        'btnCari
         '
-        Me.btn.BackColor = System.Drawing.SystemColors.HotTrack
-        Me.btn.DisabledState.BorderColor = System.Drawing.Color.DarkGray
-        Me.btn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
-        Me.btn.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.btn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.btn.FillColor = System.Drawing.Color.MediumBlue
-        Me.btn.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.btn.ForeColor = System.Drawing.Color.White
-        Me.btn.Location = New System.Drawing.Point(6, 95)
-        Me.btn.Name = "btn"
-        Me.btn.Size = New System.Drawing.Size(157, 42)
-        Me.btn.TabIndex = 2
-        Me.btn.Text = "Cari"
+        Me.btnCari.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.btnCari.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.btnCari.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.btnCari.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.btnCari.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.btnCari.FillColor = System.Drawing.Color.MediumBlue
+        Me.btnCari.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.btnCari.ForeColor = System.Drawing.Color.White
+        Me.btnCari.Location = New System.Drawing.Point(6, 95)
+        Me.btnCari.Name = "btnCari"
+        Me.btnCari.Size = New System.Drawing.Size(157, 42)
+        Me.btnCari.TabIndex = 2
+        Me.btnCari.Text = "Cari"
         '
         'txtkode
         '
@@ -167,6 +173,54 @@ Partial Class DataBarang
         Me.txtkode.SelectedText = ""
         Me.txtkode.Size = New System.Drawing.Size(632, 36)
         Me.txtkode.TabIndex = 3
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.BackColor = System.Drawing.Color.Transparent
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(640, 30)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(0, 0, 0, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(112, 20)
+        Me.Label1.TabIndex = 5
+        Me.Label1.Text = "Nama Barang"
+        '
+        'txtnama
+        '
+        Me.txtnama.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.txtnama.DefaultText = ""
+        Me.txtnama.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
+        Me.txtnama.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
+        Me.txtnama.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.txtnama.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.txtnama.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtnama.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.txtnama.ForeColor = System.Drawing.Color.Black
+        Me.txtnama.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtnama.Location = New System.Drawing.Point(644, 53)
+        Me.txtnama.Name = "txtnama"
+        Me.txtnama.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.txtnama.PlaceholderText = ""
+        Me.txtnama.SelectedText = ""
+        Me.txtnama.Size = New System.Drawing.Size(632, 36)
+        Me.txtnama.TabIndex = 6
+        '
+        'btnRefres
+        '
+        Me.btnRefres.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.btnRefres.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.btnRefres.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.btnRefres.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.btnRefres.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.btnRefres.FillColor = System.Drawing.Color.MediumBlue
+        Me.btnRefres.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.btnRefres.ForeColor = System.Drawing.Color.White
+        Me.btnRefres.Location = New System.Drawing.Point(179, 95)
+        Me.btnRefres.Name = "btnRefres"
+        Me.btnRefres.Size = New System.Drawing.Size(157, 42)
+        Me.btnRefres.TabIndex = 7
+        Me.btnRefres.Text = "Refres"
         '
         'DataBarang
         '
@@ -193,6 +247,9 @@ Partial Class DataBarang
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents dvgBarang As Guna.UI2.WinForms.Guna2DataGridView
     Friend WithEvents TXT1 As System.Windows.Forms.Label
-    Friend WithEvents btn As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents btnCari As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents txtkode As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents txtnama As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents btnRefres As Guna.UI2.WinForms.Guna2Button
 End Class

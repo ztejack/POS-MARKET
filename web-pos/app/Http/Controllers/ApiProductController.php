@@ -84,7 +84,13 @@ class ApiProductController extends Controller
      */
     public function search(Request $request){
         // $produks = ProductResource::collection(Produk::all());
-        $produk = Produk::where('kodePrd','LIKE','%'.$request->kode."%")->get();
+        if ($request->kode){
+            $produk = Produk::where('kodePrd','LIKE','%'.$request->kode."%")->get();
+        }
+        else{
+            $produk = Produk::where('namaPrd','LIKE','%'.$request->name."%")->get();
+        }
+
 
         // return $request;
         // return Produk::all();

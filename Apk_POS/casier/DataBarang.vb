@@ -52,6 +52,10 @@ Public Class DataBarang
     Private dataResults As List(Of DataBrg) = New List(Of DataBrg)
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadData()
+    End Sub
+
+    Private Sub LoadData()
         Dim jsonPost As New JsonPost(URL & "/api/v1/product")
         Dim response As String = jsonPost.getData()
         Try
@@ -67,8 +71,6 @@ Public Class DataBarang
             MessageBox.Show("make sure your database are connected")
         End Try
     End Sub
-
-
 
     Private Sub Guna2DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
 
@@ -141,11 +143,12 @@ Public Class DataBarang
 
     End Sub
 
-    Private Sub btn_Click(sender As Object, e As EventArgs) Handles btn.Click
+    Private Sub btn_Click(sender As Object, e As EventArgs) Handles btnCari.Click
         'Dim jsonPost As New JsonPost(URL & "/api/v1/product/search?kode=" & txtkode.Text)
         Dim jsonPost As New JsonPost(URL & "/api/v1/product/search")
         Dim dictData As New Dictionary(Of String, Object)
         dictData.Add("kode", txtkode.Text)
+        dictData.Add("name", txtnama.Text)
         Dim response As String = jsonPost.postData(dictData, "post")
         Console.WriteLine(response)
         Try
@@ -172,6 +175,14 @@ Public Class DataBarang
 
     Private Sub txtkode_TextChanged(sender As Object, e As EventArgs) Handles txtkode.TextChanged
 
+    End Sub
+
+    Private Sub txtnama_TextChanged(sender As Object, e As EventArgs) Handles txtnama.TextChanged
+
+    End Sub
+
+    Private Sub btnRefres_Click(sender As Object, e As EventArgs) Handles btnRefres.Click
+        LoadData()
     End Sub
 End Class
 'Public Class DataBrg
