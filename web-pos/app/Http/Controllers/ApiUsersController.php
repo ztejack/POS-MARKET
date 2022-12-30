@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\User as ModelUsers;
+use App\Models\Satker as ModelSatkers;
+use App\Models\Perusahaan as ModelPerusahaan;
+use App\Http\Resources\UserResource;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
@@ -20,7 +24,24 @@ class ApiUsersController extends Controller
      */
     public function index()
     {
-        return response()->json(User::orderBy(request('column') ? request('column') : 'updated_at', request('direction') ? request('direction') : 'desc')->paginate());
+        return UserResource::collection(ModelUsers::orderBy('name','asc')->where('level_id','=','3')->get());
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request){
+        if ($request->id){
+            $user = ModelUsers::where('id','LIKE','%'.$request->id.'%')->where('level_id','=','3')->get();
+        }
+        else{
+            $user = ModelUsers::where('name','LIKE','%'.$request->name.'%')->where('level_id','=','3')->get();
+        }
+        return UserResource::collection($user);
+
     }
 
     /**
@@ -61,7 +82,7 @@ class ApiUsersController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(ModelUsers $user)
     {
         //
     }

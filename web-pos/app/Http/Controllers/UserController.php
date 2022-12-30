@@ -89,7 +89,6 @@ class UserController extends Controller
             // 'remember_token' => Str::random(10)
         ]);
 
-
         // $validated['remember_token'] = Str::random(10);
         $validated['password'] = md5(request('password'));
 

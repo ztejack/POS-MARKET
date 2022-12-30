@@ -9,6 +9,70 @@ Imports System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel
 Imports Google.Protobuf.Reflection.FieldDescriptorProto.Types
 
 Public Class DataBarang
+
+    Public Class DataBrg
+        Public Property ID() As Integer
+        Public Property Kode_Barang() As Long
+        Public Property Nama_Barang() As String
+        Public Property Stok() As String
+        Public Property Satuan() As String
+        Public Property Harga() As String
+    End Class
+    Public Class BarangObject
+        Public Property data() As List(Of DataBrg)
+    End Class
+    Private dataResults As List(Of DataBrg) = New List(Of DataBrg)
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        txtnama.Text = ""
+        txtkode.Text = ""
+        LoadData()
+    End Sub
+
+    Private Sub LoadData()
+        Dim jsonPost As New JsonPost(URL & "/api/v1/product")
+        Dim response As String = jsonPost.getData()
+        Try
+            Dim results As BarangObject = JsonConvert.DeserializeObject(response, GetType(BarangObject))
+
+            dataResults = results.data.Select(Function(data) New DataBrg With {.ID = data.ID, .Kode_Barang = data.Kode_Barang,
+                                                .Nama_Barang = data.Nama_Barang,
+                                                    .Stok = data.Stok,
+                                                    .Satuan = data.Satuan,
+                                                    .Harga = data.Harga}).ToList
+            dvgBarang.DataSource = dataResults
+        Catch ex As Exception
+            MessageBox.Show("make sure your database are connected")
+        End Try
+    End Sub
+    Private Sub SearchData()
+        Dim jsonPost As New JsonPost(URL & "/api/v1/product/search")
+        Dim dictData As New Dictionary(Of String, Object)
+        dictData.Add("kode", txtkode.Text)
+        dictData.Add("name", txtnama.Text)
+        Dim response As String = jsonPost.postData(dictData, "post")
+        Console.WriteLine(response)
+        Try
+            Dim results As BarangObject = JsonConvert.DeserializeObject(response, GetType(BarangObject))
+
+            dataResults = results.data.Select(Function(data) New DataBrg With {.ID = data.ID, .Kode_Barang = data.Kode_Barang,
+                                                .Nama_Barang = data.Nama_Barang,
+                                                    .Stok = data.Stok,
+                                                    .Satuan = data.Satuan,
+                                                    .Harga = data.Harga}).ToList
+            dvgBarang.DataSource = dataResults
+        Catch ex As Exception
+            MessageBox.Show("make sure your database are connected")
+        End Try
+    End Sub
+
+    Private Sub Guna2DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
+
+    End Sub
+
+    Private Sub btn_Click(sender As Object, e As EventArgs) Handles btnCari.Click
+        SearchData()
+    End Sub
     'Private dataResults As List(Of DataBrg) = New List(Of DataBrg)
 
     'End Sub
@@ -37,44 +101,6 @@ Public Class DataBarang
     '    'End Try
 
     'End Sub
-    Public Class DataBrg
-        Public Property ID() As Integer
-        Public Property Kode_Barang() As Long
-        Public Property Nama_Barang() As String
-        Public Property Stok() As String
-        Public Property Satuan() As String
-        Public Property Harga() As String
-    End Class
-
-    Public Class RootObject
-        Public Property data() As List(Of DataBrg)
-    End Class
-    Private dataResults As List(Of DataBrg) = New List(Of DataBrg)
-
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LoadData()
-    End Sub
-
-    Private Sub LoadData()
-        Dim jsonPost As New JsonPost(URL & "/api/v1/product")
-        Dim response As String = jsonPost.getData()
-        Try
-            Dim results As RootObject = JsonConvert.DeserializeObject(response, GetType(RootObject))
-
-            dataResults = results.data.Select(Function(data) New DataBrg With {.ID = data.ID, .Kode_Barang = data.Kode_Barang,
-                                                .Nama_Barang = data.Nama_Barang,
-                                                    .Stok = data.Stok,
-                                                    .Satuan = data.Satuan,
-                                                    .Harga = data.Harga}).ToList
-            dvgBarang.DataSource = dataResults
-        Catch ex As Exception
-            MessageBox.Show("make sure your database are connected")
-        End Try
-    End Sub
-
-    Private Sub Guna2DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
-
-    End Sub
 
     'Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
     '    Dim jsonPost As New JsonPost(URL & "/api/users/")
@@ -143,27 +169,6 @@ Public Class DataBarang
 
     End Sub
 
-    Private Sub btn_Click(sender As Object, e As EventArgs) Handles btnCari.Click
-        'Dim jsonPost As New JsonPost(URL & "/api/v1/product/search?kode=" & txtkode.Text)
-        Dim jsonPost As New JsonPost(URL & "/api/v1/product/search")
-        Dim dictData As New Dictionary(Of String, Object)
-        dictData.Add("kode", txtkode.Text)
-        dictData.Add("name", txtnama.Text)
-        Dim response As String = jsonPost.postData(dictData, "post")
-        Console.WriteLine(response)
-        Try
-            Dim results As RootObject = JsonConvert.DeserializeObject(response, GetType(RootObject))
-
-            dataResults = results.data.Select(Function(data) New DataBrg With {.ID = data.ID, .Kode_Barang = data.Kode_Barang,
-                                                .Nama_Barang = data.Nama_Barang,
-                                                    .Stok = data.Stok,
-                                                    .Satuan = data.Satuan,
-                                                    .Harga = data.Harga}).ToList
-            dvgBarang.DataSource = dataResults
-        Catch ex As Exception
-            MessageBox.Show("make sure your database are connected")
-        End Try
-    End Sub
 
     Private Sub dvgPelanggan_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dvgBarang.CellContentClick
 

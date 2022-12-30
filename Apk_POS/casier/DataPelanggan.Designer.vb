@@ -22,21 +22,16 @@ Partial Class DataPelanggan
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TXT1 = New System.Windows.Forms.Label()
-        Me.txtkode = New Guna.UI2.WinForms.Guna2TextBox()
-        Me.btn = New Guna.UI2.WinForms.Guna2Button()
+        Me.txtid = New Guna.UI2.WinForms.Guna2TextBox()
+        Me.btnCari = New Guna.UI2.WinForms.Guna2Button()
         Me.dvgPelanggan = New Guna.UI2.WinForms.Guna2DataGridView()
-        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Nama = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.notel = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Email = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Perusahaan = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Satker = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnRefres = New Guna.UI2.WinForms.Guna2Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtnama = New Guna.UI2.WinForms.Guna2TextBox()
         CType(Me.dvgPelanggan, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -50,88 +45,87 @@ Partial Class DataPelanggan
         Me.TXT1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TXT1.Location = New System.Drawing.Point(2, 30)
         Me.TXT1.Name = "TXT1"
-        Me.TXT1.Size = New System.Drawing.Size(130, 20)
+        Me.TXT1.Size = New System.Drawing.Size(109, 20)
         Me.TXT1.TabIndex = 0
-        Me.TXT1.Text = "Kode Pelanggan"
+        Me.TXT1.Text = "ID Pelanggan"
         '
-        'txtkode
+        'txtid
         '
-        Me.txtkode.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.txtkode.DefaultText = ""
-        Me.txtkode.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
-        Me.txtkode.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
-        Me.txtkode.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.txtkode.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.txtkode.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtkode.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.txtkode.ForeColor = System.Drawing.Color.Black
-        Me.txtkode.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtkode.Location = New System.Drawing.Point(6, 53)
-        Me.txtkode.Name = "txtkode"
-        Me.txtkode.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.txtkode.PlaceholderText = ""
-        Me.txtkode.SelectedText = ""
-        Me.txtkode.Size = New System.Drawing.Size(632, 36)
-        Me.txtkode.TabIndex = 3
+        Me.txtid.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.txtid.DefaultText = ""
+        Me.txtid.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
+        Me.txtid.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
+        Me.txtid.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.txtid.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.txtid.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtid.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.txtid.ForeColor = System.Drawing.Color.Black
+        Me.txtid.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtid.Location = New System.Drawing.Point(6, 53)
+        Me.txtid.Name = "txtid"
+        Me.txtid.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.txtid.PlaceholderText = ""
+        Me.txtid.SelectedText = ""
+        Me.txtid.Size = New System.Drawing.Size(632, 36)
+        Me.txtid.TabIndex = 3
         '
-        'btn
+        'btnCari
         '
-        Me.btn.BackColor = System.Drawing.SystemColors.HotTrack
-        Me.btn.DisabledState.BorderColor = System.Drawing.Color.DarkGray
-        Me.btn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
-        Me.btn.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.btn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.btn.FillColor = System.Drawing.Color.MediumBlue
-        Me.btn.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.btn.ForeColor = System.Drawing.Color.White
-        Me.btn.Location = New System.Drawing.Point(1136, 104)
-        Me.btn.Name = "btn"
-        Me.btn.Size = New System.Drawing.Size(157, 42)
-        Me.btn.TabIndex = 2
-        Me.btn.Text = "Cari"
+        Me.btnCari.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.btnCari.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.btnCari.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.btnCari.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.btnCari.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.btnCari.FillColor = System.Drawing.Color.MediumBlue
+        Me.btnCari.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.btnCari.ForeColor = System.Drawing.Color.White
+        Me.btnCari.Location = New System.Drawing.Point(6, 95)
+        Me.btnCari.Name = "btnCari"
+        Me.btnCari.Size = New System.Drawing.Size(157, 42)
+        Me.btnCari.TabIndex = 2
+        Me.btnCari.Text = "Cari"
         '
         'dvgPelanggan
         '
         Me.dvgPelanggan.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        Me.dvgPelanggan.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        Me.dvgPelanggan.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
         Me.dvgPelanggan.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.Blue
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Blue
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dvgPelanggan.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.Blue
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Blue
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dvgPelanggan.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.dvgPelanggan.ColumnHeadersHeight = 21
         Me.dvgPelanggan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
-        Me.dvgPelanggan.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ID, Me.Nama, Me.notel, Me.Email, Me.Perusahaan, Me.Satker})
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dvgPelanggan.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dvgPelanggan.DefaultCellStyle = DataGridViewCellStyle7
         Me.dvgPelanggan.GridColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.dvgPelanggan.Location = New System.Drawing.Point(6, 163)
         Me.dvgPelanggan.Name = "dvgPelanggan"
         Me.dvgPelanggan.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dvgPelanggan.RowHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.White
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dvgPelanggan.RowHeadersDefaultCellStyle = DataGridViewCellStyle8
         Me.dvgPelanggan.RowHeadersVisible = False
         Me.dvgPelanggan.Size = New System.Drawing.Size(1287, 470)
         Me.dvgPelanggan.TabIndex = 4
@@ -157,53 +151,40 @@ Partial Class DataPelanggan
         Me.dvgPelanggan.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.dvgPelanggan.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
         '
-        'ID
-        '
-        Me.ID.HeaderText = "ID"
-        Me.ID.Name = "ID"
-        '
-        'Nama
-        '
-        Me.Nama.HeaderText = "Nama"
-        Me.Nama.Name = "Nama"
-        '
-        'notel
-        '
-        Me.notel.HeaderText = "Nomor Telephone"
-        Me.notel.Name = "notel"
-        '
-        'Email
-        '
-        Me.Email.HeaderText = "Email"
-        Me.Email.Name = "Email"
-        '
-        'Perusahaan
-        '
-        Me.Perusahaan.HeaderText = "Perusahaan"
-        Me.Perusahaan.Name = "Perusahaan"
-        '
-        'Satker
-        '
-        Me.Satker.HeaderText = "Satuan Kerja"
-        Me.Satker.Name = "Satker"
-        '
         'GroupBox1
         '
         Me.GroupBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox1.Controls.Add(Me.btnRefres)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.txtnama)
         Me.GroupBox1.Controls.Add(Me.dvgPelanggan)
         Me.GroupBox1.Controls.Add(Me.TXT1)
-        Me.GroupBox1.Controls.Add(Me.btn)
-        Me.GroupBox1.Controls.Add(Me.txtkode)
+        Me.GroupBox1.Controls.Add(Me.btnCari)
+        Me.GroupBox1.Controls.Add(Me.txtid)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(1299, 639)
         Me.GroupBox1.TabIndex = 5
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Data Pelanggan"
+        '
+        'btnRefres
+        '
+        Me.btnRefres.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.btnRefres.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.btnRefres.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.btnRefres.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.btnRefres.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.btnRefres.FillColor = System.Drawing.Color.MediumBlue
+        Me.btnRefres.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.btnRefres.ForeColor = System.Drawing.Color.White
+        Me.btnRefres.Location = New System.Drawing.Point(169, 95)
+        Me.btnRefres.Name = "btnRefres"
+        Me.btnRefres.Size = New System.Drawing.Size(157, 42)
+        Me.btnRefres.TabIndex = 8
+        Me.btnRefres.Text = "Refres"
         '
         'Label1
         '
@@ -265,16 +246,11 @@ Partial Class DataPelanggan
     End Sub
 
     Friend WithEvents TXT1 As Label
-    Friend WithEvents txtkode As Guna.UI2.WinForms.Guna2TextBox
-    Friend WithEvents btn As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents txtid As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents btnCari As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents dvgPelanggan As Guna.UI2.WinForms.Guna2DataGridView
-    Friend WithEvents ID As DataGridViewTextBoxColumn
-    Friend WithEvents Nama As DataGridViewTextBoxColumn
-    Friend WithEvents notel As DataGridViewTextBoxColumn
-    Friend WithEvents Email As DataGridViewTextBoxColumn
-    Friend WithEvents Perusahaan As DataGridViewTextBoxColumn
-    Friend WithEvents Satker As DataGridViewTextBoxColumn
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents Label1 As Label
     Friend WithEvents txtnama As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents btnRefres As Guna.UI2.WinForms.Guna2Button
 End Class
