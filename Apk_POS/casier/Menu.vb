@@ -1,4 +1,7 @@
-﻿Public Class MenuUtama
+﻿Imports casier.DataBarang
+Imports Newtonsoft.Json
+
+Public Class MenuUtama
     Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
 
     End Sub
@@ -21,8 +24,12 @@
     End Sub
 
     Private Sub LogOutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogOutToolStripMenuItem.Click
-
+        Call LogOut()
+        Me.Close()
+        FormLogin.Show()
     End Sub
+
+
 
     Private Sub DataBarangToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DataBarangToolStripMenuItem.Click
         Hiden()

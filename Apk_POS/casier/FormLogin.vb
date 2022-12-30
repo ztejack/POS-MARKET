@@ -6,7 +6,6 @@ Imports System.Net
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports Newtonsoft.Json.Linq
 Imports System.Security
-
 Public Class FormLogin
     Dim UserIndex As Integer
     Private dataResults As List(Of DataUsr) = New List(Of DataUsr)
@@ -45,7 +44,6 @@ Public Class FormLogin
             dictData.Add("email", InEmail.Text)
             dictData.Add("password", InPassword.Text)
             Dim response As String = jsonPost.postDataLogin(dictData, "post")
-            Console.WriteLine(response)
 
             Try
                 Dim results As DataUsr = JsonConvert.DeserializeObject(Of DataUsr)(response)
@@ -55,16 +53,21 @@ Public Class FormLogin
 
                 If UserLevel = 0 Then
                     Me.Hide()
+                    InEmail.Text = ""
+                    InPassword.Text = ""
                     MenuUtama.Show()
 
                 ElseIf UserLevel = 1 Then
                     Me.Hide()
+                    InEmail.Text = ""
+                    InPassword.Text = ""
                     MenuUtama.Show()
 
                 Else
                     MsgBox("Email '" & InEmail.Text & "' tidak memiliki akses", MsgBoxStyle.Exclamation, "Information")
                     InEmail.Text = ""
                     InPassword.Text = ""
+                    LogOut()
                     InEmail.Select()
                 End If
 

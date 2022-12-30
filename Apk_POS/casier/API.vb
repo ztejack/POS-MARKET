@@ -42,6 +42,16 @@ Module API
         Public Property name() As List(Of String)
         Public Property user_level As List(Of String)
     End Class
+    Public Sub LogOut()
+        Dim jsonPost As New JsonPost(URL & "/api/v1/logout")
+        Dim dictData As New Dictionary(Of String, Object)
+        Dim response As String = jsonPost.postData(dictData, "post")
+        Try
+            MessageBox.Show("Logout Berhasil")
+        Catch ex As Exception
+            MessageBox.Show("make sure your database are connected")
+        End Try
+    End Sub
 
     Public Class JsonPost
 
@@ -71,6 +81,7 @@ Module API
             End Try
             Return False
         End Function
+
         Public Function postData(ByVal dictData As Dictionary(Of String, Object), ByVal actionData As String) As String
             Dim webClient As New WebClient()
             Dim resByte As Byte()
