@@ -50,6 +50,19 @@ class ApiUsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function search(Request $request){
+        if ($request->id){
+            $user = ModelUsers::where('id','LIKE','%'.$request->id.'%')->where('level_id','=','3')->get();
+        }
+        return UserResource::collection($user);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     // public function store(Request $request)
     // {
     //     Log::debug($request->all());
