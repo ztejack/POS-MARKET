@@ -1,4 +1,6 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports casier.DataBarang
+Imports MySql.Data.MySqlClient
+Imports Newtonsoft.Json
 Imports System.Drawing.Printing
 Public Class FormTransaksi
     'produks & transaksi'
@@ -55,6 +57,23 @@ Public Class FormTransaksi
     ' Black Color
     Private BlackBrush As SolidBrush = New SolidBrush(Color.Black)
 
+    Public Class DataUsr
+        Public ID As Integer
+        Public Nama As String
+        Public UserName As String
+        Public Telepon As String
+        Public Email As String
+        Public Perusahaan As String
+        Public SatuanKerja As String
+    End Class
+    Public Class DataBrg
+        Public ID As String
+        Public Kode_Barang As String
+        Public Nama_Barang As String
+        Public Stok As String
+        Public Satuan As String
+        Public Harga As String
+    End Class
     Public Sub New()
         MyBase.New()
 
@@ -68,7 +87,7 @@ Public Class FormTransaksi
     End Sub
 
     'users'
-    Dim idpel, nama, username, perusahaanID, perusahaanName As String
+    Dim idpel, nama, username, perusahaan, perusahaanName As String
 
 
     Private Sub FormTransaksi_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -109,43 +128,70 @@ Public Class FormTransaksi
             End If
         End If
     End Sub
+    Private Sub getProduct()
+        Dim jsonPost As New JsonPost(URL & "/api/product/search/kode")
+        Dim dictData As New Dictionary(Of String, Object)
+        dictData.Add("kode", txtkodeB.Text)
+        Dim response As String = jsonPost.postData(dictData, "post")
+        Console.WriteLine(response)
+        Try
+            'Dim results As DataUsr = JsonConvert.DeserializeObject(Of DataUsr)(response)
+            '0812907180
+            Dim results As DataBrg = JsonConvert.DeserializeObject(Of DataBrg)(response)
+            'Dim results As DataBrg = JsonConvert.DeserializeObject(response, GetType(DataBrg))
+            kodeB = results.Kode_Barang
+            namaB = results.Nama_Barang
+            hargaB = results.Harga
+            stokB = results.Stok
+            txtnamaB.Text = namaB
+            txthargaB.Text = "Rp. " + Format(hargaB, "##,##")
+            txtjumlahB.Focus()
+            Console.WriteLine(results.Nama_Barang + "ini nama")
+            Console.WriteLine(results.Kode_Barang + "ini kode")
 
+
+        Catch ex As Exception
+            MessageBox.Show("Produk dengan kode barang '" & txtkodeB.Text & "' tidak ditemukan", "Oops", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtkodeB.Text = ""
+            txtkodeB.Focus()
+        End Try
+    End Sub
     Private Sub txtkodeB_TextChanged(sender As Object, e As KeyPressEventArgs) Handles txtkodeB.KeyPress
         If (e.KeyChar = Chr(13)) Then
             If (txtidpelanggan.Text = "") Then
                 txtidpelanggan.Text = "4"
             End If
             If txtkodeB.Text IsNot "" Then
-                Call conecDB()
-                Call initCMD()
+                'Call conecDB()
+                'Call initCMD()
 
-                SQL = "SELECT * FROM produks WHERE kodePrd ='" & txtkodeB.Text & "'"
-                With comDB
-                    .CommandText = SQL
-                    .ExecuteNonQuery()
-                End With
-                rdDB = comDB.ExecuteReader
-                rdDB.Read()
+                'SQL = "SELECT * FROM produks WHERE kodePrd ='" & txtkodeB.Text & "'"
+                'With comDB
+                '    .CommandText = SQL
+                '    .ExecuteNonQuery()
+                'End With
+                'rdDB = comDB.ExecuteReader
+                'rdDB.Read()
 
-                If rdDB.HasRows Then
-                    kodeB = rdDB.Item("kodePrd")
-                    namaB = rdDB.Item("namaPrd")
-                    hargaB = rdDB.Item("price")
-                    stokB = rdDB.Item("stok")
-                    txtnamaB.Text = namaB
-                    txthargaB.Text = "Rp. " + Format(hargaB, "##,##")
-                    txtjumlahB.Focus()
-                    rdDB.Close()
+                'If rdDB.HasRows Then
+                '    kodeB = rdDB.Item("kodePrd")
+                '    namaB = rdDB.Item("namaPrd")
+                '    hargaB = rdDB.Item("price")
+                '    stokB = rdDB.Item("stok")
+                '    txtnamaB.Text = namaB
+                '    txthargaB.Text = "Rp. " + Format(hargaB, "##,##")
+                '    txtjumlahB.Focus()
+                '    rdDB.Close()
 
-                Else
-                    MessageBox.Show("Produk dengan kode barang '" & txtkodeB.Text & "' tidak ditemukan", "Oops", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    txtkodeB.Text = ""
-                    txtkodeB.Focus()
-                    rdDB.Close()
+                'Else
+                '    MessageBox.Show("Produk dengan kode barang '" & txtkodeB.Text & "' tidak ditemukan", "Oops", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                '    txtkodeB.Text = ""
+                '    txtkodeB.Focus()
+                '    rdDB.Close()
 
 
-                End If
-
+                'End If
+                Call getProduct()
             Else
                 MessageBox.Show("Isi Kode barang terlebih dahulu", "Oops", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             End If
@@ -227,57 +273,82 @@ Public Class FormTransaksi
             txtkembalian.Enabled = True
         End If
     End Sub
+    'Private dataUserResults As List(Of DataUsr) = New List(Of DataUsr)
 
+    Private Sub getUser()
+
+        Dim jsonPost As New JsonPost(URL & "/api/users/search")
+        Dim dictData As New Dictionary(Of String, Object)
+        dictData.Add("id", txtidpelanggan.Text)
+        Dim response As String = jsonPost.postData(dictData, "post")
+        Console.WriteLine(response)
+        Try
+            Dim results As DataUsr = JsonConvert.DeserializeObject(response, GetType(DataUsr))
+            idpel = results.ID
+            nama = results.Nama
+            username = results.UserName
+            perusahaanName = results.Perusahaan
+            txtnamapelanggan.Text = nama
+
+        Catch ex As Exception
+            MessageBox.Show("Data pelanggan dengan ID '" & txtidpelanggan.Text & "' tidak ditemukan", "Oops", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtidpelanggan.Text = ""
+            txtnamapelanggan.Text = ""
+
+            txtidpelanggan.Focus()
+        End Try
+    End Sub
     Private Sub txtidpelanggan_TextChanged(sender As Object, e As EventArgs) Handles txtidpelanggan.TextChanged
         If txtidpelanggan.Text IsNot "" Then
-            Call conecDB()
-            Call initCMD()
+            'Call conecDB()
+            'Call initCMD()
 
-            SQL = "SELECT * FROM users WHERE id ='" & txtidpelanggan.Text & "'"
-            With comDB
-                .CommandText = SQL
-                .ExecuteNonQuery()
-            End With
-            rdDB = comDB.ExecuteReader
-            rdDB.Read()
+            'SQL = "SELECT * FROM users WHERE id ='" & txtidpelanggan.Text & "'"
+            'With comDB
+            '    .CommandText = SQL
+            '    .ExecuteNonQuery()
+            'End With
+            'rdDB = comDB.ExecuteReader
+            'rdDB.Read()
 
-            If rdDB.HasRows Then
-                idpel = rdDB.Item("id")
-                nama = rdDB.Item("name")
-                username = rdDB.Item("username")
-                perusahaanID = rdDB.Item("perusahaan_id")
-                txtnamapelanggan.Text = nama
+            'If rdDB.HasRows Then
+            '    idpel = rdDB.Item("id")
+            '    nama = rdDB.Item("name")
+            '    username = rdDB.Item("username")
+            '    perusahaanID = rdDB.Item("perusahaan_id")
+            '    txtnamapelanggan.Text = nama
 
-                rdDB.Close()
-                getperusahaan()
-            Else
-                MessageBox.Show("Data pelanggan dengan ID '" & txtidpelanggan.Text & "' tidak ditemukan", "Oops", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                txtidpelanggan.Text = ""
-                txtnamapelanggan.Text = ""
+            '    rdDB.Close()
+            '    getperusahaan()
+            'Else
+            '    MessageBox.Show("Data pelanggan dengan ID '" & txtidpelanggan.Text & "' tidak ditemukan", "Oops", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            '    txtidpelanggan.Text = ""
+            '    txtnamapelanggan.Text = ""
 
-                txtidpelanggan.Focus()
-                rdDB.Close()
+            '    txtidpelanggan.Focus()
+            '    rdDB.Close()
 
-            End If
+            'End If
+            getUser()
         Else
             txtnamapelanggan.Text = ""
         End If
     End Sub
 
-    Sub getperusahaan()
-        Call conecDB()
-        Call initCMD()
+    'Sub getperusahaan()
+    '    Call conecDB()
+    '    Call initCMD()
 
-        SQL = "SELECT * FROM perusahaans WHERE id = '" & perusahaanID & "'"
-        With comDB
-            .CommandText = SQL
-            .ExecuteNonQuery()
-        End With
-        rdDB = comDB.ExecuteReader
-        rdDB.Read()
-        perusahaanName = rdDB.Item("nama_perusahaan")
-        rdDB.Close()
-    End Sub
+    '    SQL = "SELECT * FROM perusahaans WHERE id = '" & perusahaanID & "'"
+    '    With comDB
+    '        .CommandText = SQL
+    '        .ExecuteNonQuery()
+    '    End With
+    '    rdDB = comDB.ExecuteReader
+    '    rdDB.Read()
+    '    perusahaanName = rdDB.Item("nama_perusahaan")
+    '    rdDB.Close()
+    'End Sub
 
     Sub simpandata()
         tgl = Format(txttgltransaksi.Value, "yyyy/MM/dd HH:mm:ss")
@@ -374,7 +445,6 @@ Public Class FormTransaksi
 
     End Sub
     Sub movedata()
-
         dvgtampil.AllowUserToAddRows = True
         dvgtampil.RowCount = dvgtampil.RowCount + 1
 
@@ -476,8 +546,8 @@ Public Class FormTransaksi
 
     End Sub
 
-    Private Sub Guna2Button1_Click(sender As Object, e As EventArgs)
-        DisplayInvoice()
+    Private Sub txtnamaB_TextChanged(sender As Object, e As EventArgs) Handles txtnamaB.TextChanged
+
     End Sub
 
     Private Sub txtjumlahB_ValueChanged(sender As Object, e As EventArgs) Handles txtjumlahB.ValueChanged
@@ -504,27 +574,40 @@ Public Class FormTransaksi
 
     End Sub
 
-    Private Sub TransaksiId()
+    'Private Sub TransaksiId()
+    '    Dim strSementara As String = ""
+    '    Dim strIsi As String = ""
+    '    Call conecDB()
+    '    Call initCMD()
+
+    '    SQL = "SELECT * FROM transaksis ORDER BY id DESC LIMIT 1"
+    '    With comDB
+    '        .CommandText = SQL
+    '        .ExecuteNonQuery()
+    '    End With
+    '    rdDB = comDB.ExecuteReader
+    '    rdDB.Read()
+
+    '    If rdDB.HasRows Then
+    '        strSementara = rdDB.Item("id")
+    '        strIsi = Val(strSementara) + 1
+    '        IdTransaksi.Text = "#" & strIsi & ""
+    '    End If
+
+    '    rdDB.Close()
+    'End Sub
+    Private Sub TransaksiID()
         Dim strSementara As String = ""
         Dim strIsi As String = ""
-        Call conecDB()
-        Call initCMD()
-
-        SQL = "SELECT * FROM transaksis ORDER BY id DESC LIMIT 1"
-        With comDB
-            .CommandText = SQL
-            .ExecuteNonQuery()
-        End With
-        rdDB = comDB.ExecuteReader
-        rdDB.Read()
-
-        If rdDB.HasRows Then
+        Dim jsonPost As New JsonPost(URL & "/api/v1/transaksi/id")
+        Dim response As String = jsonPost.getData()
+        Try
             strSementara = rdDB.Item("id")
             strIsi = Val(strSementara) + 1
             IdTransaksi.Text = "#" & strIsi & ""
-        End If
-
-        rdDB.Close()
+        Catch ex As Exception
+            'MessageBox.Show("make sure your database are connected")
+        End Try
     End Sub
 
 
@@ -537,7 +620,8 @@ Public Class FormTransaksi
             txthargaB.Text = ""
             txttotalB.Text = ""
         Else
-            TransaksiId()
+            TransaksiID()
+            'TrID()
             movedata()
             txtjumlahB.Value = 0
             txtkodeB.Text = ""

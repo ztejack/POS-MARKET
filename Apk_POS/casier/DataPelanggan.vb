@@ -8,6 +8,7 @@ Public Class DataPelanggan
     Public Class DataUsr
         Public Property ID() As Integer
         Public Property Nama() As String
+        Public Property UserName() As String
         Public Property Telepon() As String
         Public Property Email() As String
         Public Property Perusahaan() As String
@@ -39,6 +40,7 @@ Public Class DataPelanggan
             dataResults = results.data.Select(Function(data) New DataUsr With {
                                                   .ID = data.ID,
                                                   .Nama = data.Nama,
+                                                  .UserName = data.UserName,
                                                   .Telepon = data.Telepon,
                                                   .Email = data.Email,
                                                   .Perusahaan = data.Perusahaan,
@@ -66,6 +68,7 @@ Public Class DataPelanggan
             dataResults = results.data.Select(Function(data) New DataUsr With {
                                                   .ID = data.ID,
                                                   .Nama = data.Nama,
+                                                  .UserName = data.UserName,
                                                   .Telepon = data.Telepon,
                                                   .Email = data.Email,
                                                   .Perusahaan = data.Perusahaan,

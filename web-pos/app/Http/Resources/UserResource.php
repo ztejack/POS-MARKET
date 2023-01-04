@@ -19,6 +19,7 @@ class UserResource extends JsonResource
         return [
             'id' => $this->id,
             'Nama' => $this->name,
+            'UserName' => $this->username,
             'Telepon' => $this->phonenumber,
             'Email' => $this->email,
             'Perusahaan' => ModelsPerusahaan::where('id','=',ModelSatkers::where('id','=',$this->satker_id)->value('perusahaan_id'))->value('nama_perusahaan'),

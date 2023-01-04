@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\ProductResource;
-use App\Models\Produk;
+use App\Models\Transaksi as ModelsTransaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
-class ApiProductController extends Controller
+class ApiTransaksiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,12 +16,11 @@ class ApiProductController extends Controller
      */
     public function index()
     {
-        // return response()->json(Produk::orderBy(request('column') ? request('column') : 'updated_at', request('direction') ? request('direction') : 'desc')->paginate());
-        return ProductResource::collection(Produk::all());
-        // return response()->json(Produk::orderBy(request('column') ? request('column') : 'updated_at', request('direction') ? request('direction') : 'desc')->paginate());
+        // return response()->json(Satker::orderBy(request('column') ? request('column') : 'updated_at', request('direction') ? request('direction') : 'desc')->paginate());
+        // return response()->json(Satker::orderBy(request('column') ? request('column') : 'updated_at', request('direction') ? request('direction') : 'desc')->paginate());
+    return "abc";
 
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -30,6 +28,14 @@ class ApiProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function id()
+    {
+        return ModelsTransaksi::count();
+    }
+
+
+
+
     // public function store(Request $request)
     // {
     //     Log::debug($request->all());
@@ -59,64 +65,12 @@ class ApiProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Produk  $user
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Produk $produk)
+    public function show(User $user)
     {
-        // $produks = Produk::all();
-        // $fields = ['id', 'name'];
-        // foreach($fields as $field){
-        //     if(!empty($request->$field)){
-        //         $query->where(Produk::, '=', $request->$field);
-        //     }
-        // }
-        $produks = ProductResource::collection(Produk::findOrFail($produk));
-        // return new ProductResource($product);
-
-        return $produks;
-    }
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Produk  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function search(Request $request){
-        // $produks = ProductResource::collection(Produk::all());
-        if ($request->kode){
-            $produk = Produk::where('kodePrd','LIKE','%'.$request->kode."%")->get();
-            return ProductResource::collection($produk);
-        }
-        else{
-            $produk = Produk::where('namaPrd','LIKE','%'.$request->name."%")->get();
-            return ProductResource::collection($produk);
-        }
-    }
-
-    public function searchkode(Request $request){
-        // $produks = ProductResource::collection(Produk::all());
-        if ($request->kode){
-            $produk = Produk::where('kodePrd',$request->kode)->firstOrFail();
-            // return ProductResource::collection($produk);
-
-            // return $produk;
-            return response()->json([
-                'Id' => $produk['id'],
-                'Kode_Barang' => $produk["kodePrd"],
-                'Nama_Barang' => $produk["namaPrd"],
-                'Stok' => $produk["stok"],
-                'Satuan' => $produk["satuan"],
-                'Harga' => $produk["price"],
-            ]);
-        }
-
-
-        // return $request;
-        // return Produk::all();
-
-
-
+        //
     }
 
     // /**

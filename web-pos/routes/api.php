@@ -2,6 +2,7 @@
 use App\Http\Controllers\ApiProductController;
 use App\Http\Controllers\ApiUsersController;
 use App\Http\Controllers\ApiAuthController;
+use App\Http\Controllers\ApiTransaksiController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,9 +32,11 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     //     return $request->user();
     // });
     Route::get('product', [ApiProductController::class, 'index'])->name('products.index');
-    Route::post('product/search', [ApiProductController::class, 'search'])->name('products.search');
-    Route::post('users/search', [ApiUsersController::class, 'search'])->name('users.search');
+    // Route::post('product/search', [ApiProductController::class, 'search'])->name('products.search');
+    // Route::post('users/search', [ApiUsersController::class, 'search'])->name('users.search');
     Route::get('users', [ApiUsersController::class, 'index'])->name('user.index');
+    Route::get('transaksi/id', [ApiTransaksiController::class, 'id'])->name('transaksi.id');
+
 
     // Route::post('product', [ApiProductController::class, 'store'])->name('products.store');
     // Route::put('product/{product}', [ApiProductController::class, 'update'])->name('products.update');
@@ -43,7 +46,9 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     //     // '/product'=>ApiProductController::class,]);
 });
 
-
+Route::post('product/search/kode', [ApiProductController::class, 'searchkode'])->name('products.searchkode');
+Route::post('users/search', [ApiUsersController::class, 'search'])->name('users.search');
+// Route::get('transaksi/id',[ApiTransaksiController::class, 'index'])->name('transaksi.id');
 
 
 
