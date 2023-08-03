@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User as ModelUsers;
 use App\Models\Satker as ModelSatkers;
 use App\Models\Perusahaan as ModelPerusahaan;
+
 use App\Http\Resources\UserResource;
 
 use Illuminate\Http\Request;
@@ -50,11 +51,20 @@ class ApiUsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function searchkode(Request $request){
+    public function searchid(Request $request){
         if ($request->id){
-            $user = ModelUsers::where('id','LIKE','%'.$request->id.'%')->where('level_id','=','3')->get();
+            $user = ModelUsers::where('id',$request->id)->firstOrFail();
+
+            return response()->json([
+                'id' => $user->id,
+                'Nama' => $user->name,
+                'UserName' => $user->username,
+                'Telepon' => $user->phonenumber,
+                'Email' => $user->email,
+                'Perusahaan' => ModelPerusahaan::where('id',ModelSatkers::where('id',$user->satker_id)->value('perusahaan_id'))->value('nama_perusahaan'),
+                'SatuanKerja' => ModelSatkers::where('id',$user->satker_id)->value('satker'),
+            ]);
         }
-        return UserResource::collection($user);
     }
 
     /**

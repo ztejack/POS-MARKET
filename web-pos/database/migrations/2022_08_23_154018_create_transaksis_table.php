@@ -17,9 +17,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_pelanggan')->default(false)->references('id')->on('users');
             $table->boolean('metode_Byr');
-            $table->foreignId('id_tagihan')->default(false)->references('id')->on('tagihans');
+            // $table->foreignId('id_tagihan')->references('id')->on('tagihans')->nullable()->default(NULL);
+            $table->foreignId('id_tagihan')->nullable()->default(NULL);
             $table->integer('total_Byr');
-            $table->timestamps();
+            // $table->timestamps()->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
     /**

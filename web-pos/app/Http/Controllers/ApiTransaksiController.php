@@ -32,6 +32,30 @@ class ApiTransaksiController extends Controller
     {
         return ModelsTransaksi::count();
     }
+    public function addtagihan(){
+
+    }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        
+        $user = new User;
+        if (trim($request->password) == '') {
+            $input = $request->except('password');
+        } else {
+            $input['password'] = bcrypt($request->password);
+            $user->password = $input['password'];
+        }
+        $user->name = $input['name'];
+        $user->email = $input['email'];
+        $user->save();
+        return response()->json($user, 201);
+    }
 
 
 

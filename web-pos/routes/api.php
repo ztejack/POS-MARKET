@@ -32,22 +32,24 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     //     return $request->user();
     // });
     Route::get('product', [ApiProductController::class, 'index'])->name('products.index');
-    // Route::post('product/search', [ApiProductController::class, 'search'])->name('products.search');
-    // Route::post('users/search', [ApiUsersController::class, 'search'])->name('users.search');
+    Route::post('product/search', [ApiProductController::class, 'search'])->name('products.search');
+    Route::post('users/search', [ApiUsersController::class, 'search'])->name('users.search');
     Route::get('users', [ApiUsersController::class, 'index'])->name('user.index');
     Route::get('transaksi/id', [ApiTransaksiController::class, 'id'])->name('transaksi.id');
+    Route::post('product/search/kode', [ApiProductController::class, 'searchkode'])->name('products.searchkode');
+    Route::post('users/search/id', [ApiUsersController::class, 'searchid'])->name('users.searchid');
 
 
     // Route::post('product', [ApiProductController::class, 'store'])->name('products.store');
     // Route::put('product/{product}', [ApiProductController::class, 'update'])->name('products.update');
     // Route::delete('product/{product}', [ApiProductController::class, 'destroy'])->name('products.destroy');
     // Route::apiResources([
+
     //     '/usersall'=>ApiUsersController::class,
     //     // '/product'=>ApiProductController::class,]);
 });
 
-Route::post('product/search/kode', [ApiProductController::class, 'searchkode'])->name('products.searchkode');
-Route::post('users/search', [ApiUsersController::class, 'search'])->name('users.search');
+
 // Route::get('transaksi/id',[ApiTransaksiController::class, 'index'])->name('transaksi.id');
 
 
